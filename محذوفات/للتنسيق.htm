@@ -1,0 +1,2060 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>نموذج لجنة الرقية الشرعية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/themes/material_blue.css">
+    <style>
+        html {
+            scroll-behavior: smooth; /* حركة التمرير الناعمة */
+        }
+        /* New Color Palette */
+        :root {
+            --primary-color: #1E3A8A;
+            /* Royal Blue */
+            --secondary-color: #10B981;
+            /* Mint Green */
+            --background-color: #F9FAFB;
+            /* Soft Gray */
+            --text-color: #1F2937;
+            /* Dark Gray */
+            --card-background: #FFFFFF;
+            /* White for cards/fields */
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            /* Soft Shadow */
+            --button-text-color: #FFFFFF;
+            /* White text for buttons */
+            --focus-border-color: #1E3A8A;
+            /* Royal Blue for focus */
+            --yes-color: #10B981;
+            /* Mint green for Yes */
+            --no-color: #EF4444;
+            /* Red for No */
+            --warning-color: #F59E0B;
+            /* Amber for warnings */
+
+            /* New Button Colors */
+            --submit-button-color: var(--secondary-color);
+            /* Mint Green for Submit */
+            --update-button-color: var(--primary-color);
+            /* Royal Blue for Update */
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+            direction: rtl;
+            /* Ensure Right-to-Left direction */
+            text-align: right;
+            /* Ensure text alignment is right */
+        }
+
+        header,
+        footer {
+            background-color: var(--card-background);
+            /* Use white for header/footer background */
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            /* Adjusted shadow */
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header img {
+            height: 100px;
+            /* Increased Header Logo Size */
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+            /* Slightly larger font size */
+            font-weight: 700;
+            /* Bold font for headings */
+             color: var(--primary-color); /* تم التعديل: اللون الأساسي أسود */
+            margin: 0 0 15px 0;
+            /* Added more bottom margin */
+            text-align: center;
+        }
+
+        .location-highlight { /* تمت الإضافة: لتلوين جزء من العنوان */
+             color: var(--primary-color); 
+        }
+
+        /* Style for Header Links Container (moved outside header) */
+        .header-links {
+            text-align: center;
+            /* Center the links/buttons */
+            margin-top: 10px;
+            /* Space below the header */
+            margin-bottom: 20px;
+            /* Space above the main container */
+        }
+
+        .header-links a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 400;
+            /* Regular weight for links */
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+            /* Style links as buttons for better appearance */
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            background-color: #fff;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .header-links a:hover {
+            color: #fff;
+            background-color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            /* Increased max width */
+            margin: 20px auto;
+            padding: 0 20px;
+            /* Add some padding on the sides */
+            display: grid;
+            /* grid-template-columns is controlled by JS based on section visibility */
+            gap: 30px;
+            /* Space between columns (or rows when stacked) */
+        }
+
+        @media screen and (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr !important;
+                /* Always stack columns on smaller screens */
+            }
+        }
+
+
+        .form-container {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: 10px;
+            /* More rounded corners */
+            box-shadow: 0 4px 12px var(--shadow-color);
+            /* Softer, larger shadow */
+            border: 1px solid #eee;
+            /* Lighter border */
+        }
+
+        .report-container {
+            background-color: var(--card-background);
+            /* White background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            /* Soft shadow */
+            border: none;
+            /* No border */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            /* Slightly more space */
+            color: var(--text-color);
+            /* Dark gray color */
+            font-weight: 700;
+            /* Bold labels */
+            font-size: 0.95em;
+            /* Slightly smaller font */
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            /* Increased padding */
+            margin-bottom: 20px;
+            /* More space below fields */
+            border: 1px solid #ddd;
+            /* Lighter border */
+            border-radius: 6px;
+            /* Slightly more rounded */
+            font-family: 'Tajawal', sans-serif;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: #fefefe;
+            /* Very light background for fields */
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--focus-border-color);
+            outline: none;
+            box-shadow: 0 0 8px rgba(30, 58, 138, 0.2);
+            /* Shadow matching primary color */
+            background-color: #fff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+            /* Increased min height */
+        }
+
+        /* Button Styling */
+        button {
+            color: var(--button-text-color);
+            padding: 12px 25px;
+            /* Increased padding */
+            border: none;
+            border-radius: 8px;
+            /* More rounded buttons */
+            cursor: pointer;
+            font-size: 1.05em;
+            /* Slightly larger font */
+            font-weight: 700;
+            /* Bold button text */
+            transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            margin-right: 15px;
+            /* More space between buttons */
+            box-shadow: 0 4px 8px var(--shadow-color);
+            /* Soft shadow */
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            /* Slight lift effect */
+            box-shadow: 0 6px 12px var(--shadow-color);
+            /* Larger shadow on hover */
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px var(--shadow-color);
+        }
+
+        /* Specific style for the Search button */
+        #search-button {
+            background: none;
+            background-color: var(--primary-color);
+            /* Solid primary color */
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        #search-button:hover {
+            background-color: var(--secondary-color);
+            /* Change to secondary on hover */
+        }
+
+        /* Specific style for the Submit button */
+        button[type="submit"] {
+            background-color: var(--submit-button-color);
+            /* Mint Green */
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0B9B6B;
+            /* Slightly darker mint green on hover */
+        }
+
+        /* Specific style for the Update button */
+        #update-button {
+            background-color: var(--update-button-color);
+            /* Royal Blue */
+        }
+
+        #update-button:hover {
+            background-color: #162C6A;
+            /* Slightly darker royal blue on hover */
+        }
+
+        /* Style for Print PDF Button - Updated Color */
+        #print-pdf-button {
+            background-color: #ddc454; /* كان رمادي داكن، ربما ترغب في تغييره ليتناسق */
+        }
+
+        #print-pdf-button:hover {
+            background-color: #1f2021;
+        }
+
+        /* Style for Get Location Button */
+        #get-location-button {
+            background-color: #06B6D4;
+            /* Cyan color */
+        }
+
+        #get-location-button:hover {
+            background-color: #0891B2;
+            /* Darker cyan on hover */
+        }
+
+        /* Styles for Signature Canvas */
+        .signature-pad {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #fff;
+            cursor: crosshair;
+            touch-action: none;
+            /* Prevent scrolling when drawing on touch devices */
+            width: 100%;
+            /* Make it responsive */
+            height: 150px;
+            /* Set a fixed height */
+            margin-bottom: 10px;
+            /* Space below the canvas */
+        }
+
+        /* Styles for Clear Signature Button */
+        .clear-signature {
+            background-color: #EF4444;
+            /* Red color for clear button */
+            color: white;
+            padding: 6px 12px;
+            /* Smaller padding */
+            font-size: 0.85em;
+            /* Smaller font size */
+            margin-top: 5px;
+            /* Small space above the button */
+            margin-bottom: 20px;
+            /* Space after the button */
+            display: block;
+            width: fit-content;
+        }
+
+        .clear-signature:hover {
+            background-color: #DC2626;
+            /* Darker red on hover */
+        }
+
+
+        .success {
+            text-align: center;
+            color: var(--secondary-color);
+            /* Green color for success */
+            font-weight: 700;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+
+        .criteria-section {
+            background-color: var(--card-background);
+            padding: 25px;
+            /* Increased padding */
+            border-radius: 10px;
+            margin-bottom: 25px;
+            /* More space below */
+            box-shadow: 0 2px 8px var(--shadow-color);
+            /* Card shadow */
+            border: 1px solid #eee;
+        }
+
+        .criteria-section h3 {
+            color: var(--primary-color);
+            /* Primary color for section title */
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            font-weight: 700;
+            border-bottom: 2px solid var(--secondary-color);
+            /* Underline with secondary color */
+            padding-bottom: 10px;
+        }
+
+        .criterion {
+            margin-bottom: 20px;
+            /* More space between criteria */
+            padding: 15px;
+            border: 1px solid #eee;
+            /* Border around each criterion */
+            border-radius: 8px;
+            /* Rounded corners for criteria cards */
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            /* Light shadow for criterion card */
+            background-color: #fcfcfc;
+            /* Slightly different background for criterion card */
+        }
+
+        .criterion:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .criterion-label {
+            display: block;
+            margin-bottom: 10px;
+            /* More space below label */
+            font-weight: 400;
+            /* Regular weight for criterion text */
+            color: var(--text-color);
+            font-size: 1em;
+        }
+
+        .options {
+            display: flex;
+            gap: 20px;
+            /* Increased space between options */
+            margin-top: 8px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            /* Space between radio button and text */
+            font-weight: 400;
+            /* Regular weight for options */
+            color: var(--text-color);
+            cursor: pointer;
+            /* Indicate clickable */
+        }
+
+        .criterion .options label.yes {
+            color: var(--yes-color);
+            font-weight: 700;
+            /* Bold Yes */
+        }
+
+        .criterion .options label.no {
+            color: var(--no-color);
+            font-weight: 700;
+            /* Bold No */
+        }
+
+        .yes input {
+            accent-color: var(--yes-color);
+        }
+
+        .no input {
+            accent-color: var(--no-color);
+        }
+
+        /* Style for warning message next to criteria */
+        .warning-message {
+            color: var(--warning-color);
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .warning-message.hidden {
+            display: none;
+        }
+
+        /* تذييل بسيط */
+        footer {
+            margin-top: 40px;
+            /* More space above footer */
+            padding: 20px;
+            /* Keep padding */
+            text-align: center;
+            /* Keep centering */
+            box-shadow: 0 2px 8px var(--shadow-color);
+            /* Keep shadow */
+            background-color: var(--card-background);
+            /* Keep background */
+            font-size: 0.9em;
+            color: var(--text-color);
+            display: flex;
+            /* Use flex for centering text */
+            flex-direction: column;
+            /* Stack items (though only one text item now) */
+            align-items: center;
+            justify-content: center;
+            /* Center vertically */
+        }
+
+        /* Remove style for footer img as the img tag is removed */
+        footer img {
+            display: none;
+            /* Hide the logo */
+        }
+
+
+        /* استجابة للشاشات الصغيرة */
+        @media screen and (max-width: 600px) {
+            .form-container,
+            .report-container {
+                padding: 20px;
+                margin: 10px 0;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            header img {
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+
+            /* --- تعديل أزرار الواجهة للجوال --- */
+            .header-links {
+                display: flex; 
+                justify-content: center; 
+                flex-wrap: wrap; 
+                gap: 5px; 
+            }
+
+            .header-links a {
+                padding: 6px 10px; 
+                font-size: 0.9em; 
+                margin: 5px 5px; 
+                flex-grow: 1; 
+                text-align: center; 
+            }
+            /* --- نهاية تعديل أزرار الواجهة --- */
+
+
+            button { /* هذا قد يؤثر على جميع الأزرار، تأكد من أنك تريده عامًا هكذا */
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+             /* استثناء لأزرار معينة إذا لزم الأمر */
+            .header-links button { /* إذا كانت الأزرار داخل header-links هي أزرار فعلية وليست روابط <a> */
+                width: auto; /* أو flex-grow: 1; إذا كنت تريدها أن تتمدد */
+            }
+             #search-container button, 
+            .form-container > form > button, /* الأزرار الرئيسية في الفورم */
+            .clear-signature {
+                width: auto; /* إعادة العرض التلقائي لأزرار معينة */
+            }
+            .form-container > form > button { /* الأزرار الرئيسية في الفورم (إرسال، تعديل، طباعة) */
+                 width: calc(33.333% - 10px); /* مثال لجعلها ثلاثة في الصف مع مسافات */
+                 margin-left: 5px;
+                 margin-right: 5px;
+            }
+             .form-container > form > button:last-child {
+                 margin-left: 0; /* أو margin-right: 0 إذا كان هناك زر واحد فقط في النهاية */
+             }
+
+
+            .container {
+                padding: 0 10px;
+            }
+
+            .member-input {
+                flex-direction: column;
+                /* Stack items vertically on small screens */
+                align-items: stretch;
+                /* Stretch items to fill width */
+            }
+
+            .member-details {
+                width: 100%;
+                /* Allow details to take full width */
+                margin-top: 10px;
+                /* Add space above details when stacked */
+            }
+
+            /* New styles for location input group on small screens */
+            .location-input-group {
+                flex-direction: column;
+                /* Stack input and button vertically */
+                gap: 15px;
+                /* Adjust gap when stacked */
+            }
+
+            .location-input-group input,
+            .location-input-group button {
+                width: 100%;
+                /* Make them full width */
+                margin-bottom: 0 !important;
+                /* Remove individual margins */
+            }
+
+        }
+
+
+        /* Style for the search box container */
+        .search-container {
+            margin-bottom: 25px;
+            /* More space below search */
+            padding: 20px;
+            background-color: #f1f5f9;
+            /* Lighter background for search */
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            display: flex;
+            gap: 15px;
+            /* More space between elements */
+            align-items: center;
+            box-shadow: 0 1px 4px var(--shadow-color);
+            flex-wrap: wrap;
+            /* Allow wrapping on smaller screens */
+        }
+
+        .search-container label {
+            font-weight: 400;
+            margin-bottom: 0;
+            color: var(--text-color);
+            flex-shrink: 0;
+            /* Prevent label from shrinking */
+        }
+
+        .search-container input[type="text"] {
+            flex-grow: 1;
+            margin-bottom: 0;
+            min-width: 150px;
+            /* Ensure input has a minimum width */
+        }
+
+        .search-container button {
+            margin-right: 0;
+            flex-shrink: 0;
+            /* Prevent button from shrinking */
+        }
+
+        /* Style for the Power BI embed container */
+        .powerbi-container {
+            margin-top: 0;
+            /* Removed top margin as it's handled by grid gap */
+            border-radius: 10px;
+            overflow: hidden;
+            /* Moved box-shadow and border to report-container */
+        }
+
+        /* Style for the report container itself */
+        .report-container {
+            background-color: var(--card-background);
+            /* White background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            /* Soft shadow */
+            border: none;
+            /* No border */
+        }
+
+
+        .powerbi-container iframe {
+            display: block;
+            width: 100%;
+            height: 600px;
+            /* Kept original height */
+            border: none;
+        }
+
+        /* CSS to hide elements */
+        .hidden {
+            display: none;
+        }
+
+        /* Styling for the members section - Updated */
+        .members-section {
+            background-color: var(--card-background);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            /* Card shadow */
+            border: 1px solid #eee;
+            margin-top: 40px;
+            /* Added space above members section */
+        }
+
+        .members-section h3 {
+            color: var(--primary-color);
+            /* Primary color for section title */
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            font-weight: 700;
+            border-bottom: 2px solid var(--secondary-color);
+            /* Underline with secondary color */
+            padding-bottom: 10px;
+        }
+
+        .member-input {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            /* Align items to the top */
+            gap: 10px;
+            background-color: #fcfcfc;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+            flex-wrap: wrap;
+        }
+
+        .member-logo {
+            height: 70px;
+            /* Increased Member Logo Size */
+            width: auto;
+            flex-shrink: 0;
+            margin-top: 5px;
+            /* Align logo slightly down */
+        }
+
+        .member-details {
+            /* Styles for the container holding name, signature, date */
+            display: flex;
+            flex-direction: column;
+            /* Stack contents vertically */
+            flex-grow: 1;
+            /* Allow to take available space */
+            min-width: 0;
+            /* Allow shrinking */
+        }
+
+        .member-details label {
+            margin-bottom: 5px;
+            /* Space between labels and inputs */
+            font-weight: 400;
+            font-size: 1em;
+            display: block;
+            /* Ensure labels are block elements */
+        }
+
+        .member-details input[type="text"],
+        .member-details input[type="date"] {
+            margin-bottom: 10px;
+            /* Space below each input */
+            width: 100%;
+            /* Ensure inputs fill the container */
+            box-sizing: border-box;
+            /* Include padding and border in the element's total width */
+        }
+
+        .member-details input[type="text"]:last-child,
+        .member-details input[type="date"]:last-child {
+            margin-bottom: 0;
+            /* No bottom margin for the last input in the details */
+        }
+
+
+        /* Styling for the report title when it's outside the container */
+        .report-title {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            /* Slightly larger font size */
+            font-weight: 700;
+            /* Bold font */
+            text-align: center;
+            margin-bottom: 20px;
+            /* Space below the title */
+            margin-top: 0;
+        }
+
+        /* Styling for Final Evaluation */
+        #final-evaluation {
+            margin-top: 25px;
+            margin-bottom: 40px;
+            /* Added space below final evaluation */
+            font-size: 1.2em;
+            font-weight: 700;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #e0f2f7;
+            /* Light blue background */
+        }
+
+        #final-evaluation.qualified {
+            background-color: #d1fae5;
+            /* Light green */
+            color: var(--secondary-color);
+        }
+
+        #final-evaluation.needs-review {
+            background-color: #fef3c7;
+            /* Light yellow */
+            color: var(--warning-color);
+        }
+
+        #final-evaluation.not-qualified {
+            background-color: #fee2e2;
+            /* Light red */
+            color: var(--no-color);
+        }
+
+        /* Style for QR Code Section - Removed */
+        .qr-code-container {
+            display: none;
+            /* Hide the container */
+        }
+
+
+        /* Style for Scroll to Top Button */
+        #scroll-to-top {
+            position: fixed;
+            /* Stay in place */
+            bottom: 20px;
+            /* Distance from the bottom */
+            right: 20px;
+            /* Distance from the right */
+            z-index: 1000;
+            /* Ensure it's above other content */
+            padding: 10px 15px;
+            background-color: var(--primary-color);
+            /* Use primary color */
+            color: var(--button-text-color);
+            /* White text */
+            border: none;
+            border-radius: 50%;
+            /* Make it round */
+            font-size: 1.5em;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.3s, visibility 0.3s;
+            opacity: 0;
+            /* Initially hidden */
+            visibility: hidden;
+            /* Initially hidden */
+        }
+
+        #scroll-to-top.visible {
+            opacity: 1;
+            /* Show when visible class is added */
+            visibility: visible;
+            /* Show when visible class is added */
+        }
+
+        #scroll-to-top:hover {
+            background-color: var(--secondary-color);
+            /* Change color on hover */
+        }
+
+        /* Styles for Print PDF */
+        @media print {
+            body {
+                background-color: #fff;
+                margin: 0;
+                padding: 0;
+            }
+
+            header,
+            footer,
+            .header-links,
+            .search-container,
+            button, /* سيخفي جميع الأزرار، بما في ذلك أزرار المسح إذا كانت من نوع button */
+            .clear-signature, /* تأكيد إخفاء أزرار المسح */
+            #msg,
+            .report-section-container, /* اسم الكلاس الصحيح للحاوية التي تحتوي على التقرير */
+            #scroll-to-top {
+                display: none !important;
+            }
+            
+            #input-section { /* إظهار قسم الإدخال فقط عند الطباعة */
+                display: block !important;
+            }
+
+            /* تأكد أن printable-form-content هو ما تريد طباعته وأن له محتوى */
+             #printable-form-content { /* أو #print-area إذا كنت تستخدمه */
+                display: block !important;
+                width: 100%; /* أو 210mm إذا كنت تستهدف A4 بشكل دقيق */
+                margin: 0 auto;
+                padding: 10mm; /* أو 15mm */
+                box-sizing: border-box;
+                color: black;
+                font-size: 11pt;
+                box-shadow: none;
+                border: none;
+            }
+            
+            #printable-form-content input,
+            #printable-form-content select,
+            #printable-form-content textarea {
+                border: none !important; /* استخدام !important لضمان تجاوز الأنماط الأخرى */
+                background-color: transparent !important;
+                padding: 0 !important;
+                margin-bottom: 5px !important;
+                font-family: 'Tajawal', sans-serif !important;
+                font-size: 11pt !important;
+                color: black !important;
+                box-shadow: none !important; /* إزالة أي ظلال */
+                -webkit-appearance: none; /* إزالة مظهر المتصفح الافتراضي */
+                -moz-appearance: none;
+                appearance: none;
+            }
+             /* تحويل القيم المحددة في select إلى نص ظاهر */
+            #printable-form-content select {
+                border: none !important;
+                /* يمكنك استخدام JavaScript لتحويل القيمة إلى نص هنا إذا لزم الأمر قبل الطباعة */
+            }
+
+            /* إظهار القيم المحددة للراديو والتشيك بوكس */
+            #printable-form-content input[type="radio"]:checked::after,
+            #printable-form-content input[type="checkbox"]:checked::after {
+                content: attr(value); /* قد لا تعمل بشكل جيد مع جميع المتصفحات، بديل هو JS */
+                display: inline-block;
+                margin-left: 5px;
+            }
+             #printable-form-content input[type="radio"],
+            #printable-form-content input[type="checkbox"] {
+                 display: inline-block; /* أو none إذا كنت ستعتمد على JS لإظهار القيمة */
+                 width: auto;
+                 margin-right: 5px;
+            }
+
+
+            #printable-form-content label {
+                font-weight: bold; /* جعل الليبلات bold في الطباعة */
+                display: inline;
+                margin-bottom: 0;
+                padding-left: 5px;
+            }
+
+            /* تعديل العناوين للطباعة */
+            #printable-form-content h1,
+            #printable-form-content h2,
+            #printable-form-content h3 {
+                color: black !important;
+                border-bottom: 1px solid #ccc !important;
+                padding-bottom: 5px !important;
+                margin-bottom: 15px !important;
+            }
+
+            /* إبقاء الصور للتوقيعات */
+            #printable-form-content img.signature-image { /* افترض أنك ستضيف كلاس للصور الناتجة من الكانفاس */
+                max-width: 150px !important; /* تحديد عرض أقصى لصورة التوقيع */
+                height: auto !important;
+                display: block !important; /* أو inline-block حسب التنسيق */
+                margin-top: 5px;
+                border: 1px solid #eee; /* حد خفيف حول صورة التوقيع */
+            }
+            
+            .signature-pad { /* إخفاء الكانفاس نفسه */
+                display: none !important;
+            }
+            /* يجب أن يكون لديك منطق في JS لتحويل الكانفاس إلى <img> قبل الطباعة إذا لم تستخدم html2pdf */
+            /* html2pdf يعالج هذا تلقائياً */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="login-overlay" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+        display: none; /* Initially hide the overlay */
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        ">
+        <div style="
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            ">
+            <h2 style="color: var(--primary-color);">تسجيل الدخول</h2>
+            <input type="text" id="username-input" placeholder="اسم المستخدم" style="margin-bottom: 15px; text-align: center;">
+            <input type="password" id="password-input" placeholder="كلمة المرور" style="margin-bottom: 20px; text-align: center;">
+            <button type="button" id="login-button" style="background-color: var(--primary-color);">دخول</button>
+            <button type="button" id="guest-button" style="background-color: #6B7280; margin-right: 10px;">دخول كزائر</button>
+            <p id="login-message" style="color: red; margin-top: 15px;"></p>
+        </div>
+    </div>
+    <header>
+        <img src="iemg/e-logo.svg" alt="Logo">
+        <h1>بيانات مزاولي أعمال الرقية الشرعية<span class="location-highlight">بمحافظة جدة</span></h1>
+    </header>
+
+    <div class="header-links">
+        <a href="#" id="input-link">واجهة الادخال</a>
+        <a href="#" id="report-link">عرض التقرير</a>
+        <a href="#" id="login-toggle-link">تسجيل الدخول</a> <a href="#" id="logout-link" style="display: none;">تسجيل الخروج</a> </div>
+
+
+    <div class="container">
+        <div class="form-container" id="input-section">
+            <div class="search-container" id="search-container">
+                <label for="search-id">البحث برقم الهوية:</label>
+                <input type="text" id="search-id" name="search-id" pattern="\d{10}" maxlength="10"
+                    title="يجب أن يكون 10 أرقام">
+                <button type="button" id="search-button">بحث</button>
+            </div>
+
+
+            <form id="form">
+                <div id="printable-form-content"> <label for="name">الاسم</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="id">رقم الهوية</label>
+                    <input type="text" id="id" name="id" pattern="\d{10}" maxlength="10" title="يجب أن يكون 10 أرقام"
+                        required>
+
+                    <label for="phone">رقم الجوال</label>
+                    <input type="text" id="phone" name="phone" pattern="\d{10}" maxlength="10"
+                        title="يجب أن يكون 10 أرقام" required>
+
+                    <label for="practitioner_location_coords">موقع المزاول (إحداثيات)</label>
+                    <div class="location-input-group" style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <input type="text" id="practitioner_location_coords" name="practitioner_location_coords"
+                            placeholder="سيتم التعبئة تلقائياً بعد تحديد الموقع أو يمكن التعديل يدوياً"
+                            style="flex-grow: 1; margin-bottom: 0;" required>
+                        <button type="button" id="get-location-button" style="margin-bottom: 0; flex-shrink: 0;">تحديد
+                            موقعي 📍</button>
+                    </div>
+                    <input type="hidden" id="practitioner_location" name="practitioner_location">
+
+
+                    <label for="nationality">الجنسية</label>
+                    <select id="nationality" name="nationality" required>
+                        <option value="">-- اختر --</option>
+                        <option>سعودي</option>
+                        <option>غير سعودي</option>
+                    </select>
+
+                    <label for="status">الحالة الاجتماعية</label>
+                    <select id="status" name="status" required>
+                        <option>أعزب</option>
+                        <option>متزوج</option>
+                    </select>
+
+                    <label for="dob">تاريخ الميلاد</label>
+                    <input type="text" id="dob" name="dob" required>
+                    <label for="education">المؤهل التعليمي</label>
+                    <select id="education" name="education" required>
+                        <option value="">-- اختر --</option>
+                        <option>دكتوراه</option>
+                        <option>ماجستير</option>
+                        <option>بكالوريوس</option>
+                        <option>ثانوي</option>
+                        <option>متوسط</option>
+                        <option>ابتدائي</option>
+                    </select>
+
+                    <label for="gender">الجنس</label>
+                    <select id="gender" name="gender" required>
+                        <option>ذكر</option>
+                        <option>أنثى</option>
+                    </select>
+
+                    <label for="practice_type">نوع المزاولة</label>
+                    <select id="practice_type" name="practice_type" required>
+                        <option value="">-- اختر --</option>
+                        <option>راقي شرعي</option>
+                        <option>معالج شعبي</option>
+                        <option>مفسر أحلام</option>
+                    </select>
+
+                    <label for="profession">المهنة</label>
+                    <select id="profession" name="profession" required>
+                        <option value="">-- اختر --</option>
+                        <option>متسبب</option>
+                        <option>موظف</option>
+                    </select>
+
+                    <label for="previously_prevented">هل سبق أن تم منعه؟</label>
+                    <select id="previously_prevented" name="previously_prevented" required>
+                        <option value="">-- اختر --</option>
+                        <option>نعم</option>
+                        <option>لا</option>
+                    </select>
+
+                    <label for="practice_status">حالة المزاول</label>
+                    <select id="practice_status" name="practice_status" required>
+                        <option value="">-- اختر --</option>
+                        <option>مستمر</option>
+                        <option>منقطع</option>
+                        <option>تم الإيقاف</option>
+                    </select>
+
+                    <label for="visit_type">رقم الزيارة</label>
+                    <select id="visit_type" name="visit_type" required>
+                        <option value="">-- اختر --</option>
+                        <script>
+                            for (let i = 1; i <= 10; i++) {
+                                document.write(`<option>${i}</option>`);
+                            }
+                        </script>
+                    </select>
+
+                    <label for="meeting_date">تاريخ المحضر</label>
+                    <input type="text" id="meeting_date" name="meeting_date" required>
+                    <label for="notes">ملاحظات اللجنة</label>
+                    <textarea id="notes" name="notes"></textarea>
+
+                    <label for="opinion">رأي اللجنة</label>
+                    <textarea id="opinion" name="opinion"></textarea>
+
+                    <div class="criteria-section">
+                        <h3>معايير التقييم</h3>
+
+                        <div class="criterion" data-criterion-type="positive"> <span class="criterion-label">حفظ القرآن
+                                الكريم، متوفر فيه الصلاح، الإتقان لأحكام الرقية وعلى قدر من العلم بالشريعة</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria1" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria1" value="لا" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="positive">
+                            <span class="criterion-label">وجود كشف طبي يضمن سلامة الراقي أو المعالج من الأمراض المعدية
+                                (صلاحيته ستة أشهر)</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria2" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria2" value="لا" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="negative"> <span class="criterion-label">استخدام أي
+                                أسلوب من أساليب التعذيب كالضرب أو الخنق أو الصعق الكهربائي أو خلافه</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria3" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria3" value="لا" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="neutral-positive"> <span class="criterion-label">استخدام
+                                الوافدين مع المزاول</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria4" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria4" value="لا" required> لا</label>
+                            </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="negative">
+                            <span class="criterion-label">القراءة الجماعية أو مكبرات الصوت</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria5" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria5" value="لا" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="positive"> <span class="criterion-label">القراءة على
+                                النساء بوجود محرم</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria6" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria6" value="لا" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="negative">
+                            <span class="criterion-label">استخدام القنوات الفضائية أو الشبكات العنكبوتية ومواقع التواصل
+                                الاجتماعي للإعلان أو للتسويق</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria7" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria7" value="لا" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="negative">
+                            <span class="criterion-label">وجود مسميات للمزاول مثل الروحاني أو المعالج أو خلاف ذلك</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria8" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria8" value="لا" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="neutral-positive"> <span
+                                class="criterion-label">الاشتراط بمبالغ مالية</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria9" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria9" value="لا" required> لا</label>
+                            </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="negative">
+                            <span class="criterion-label">بيع الماء أو الأعشاب أو الزيوت أو العسل أو الخلطات مجهولة
+                                المصدر</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria10" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria10" value="لا" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="negative">
+                            <span class="criterion-label">وضع لوحة إعلانية لمقر المزاول</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria11" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria11" value="لا" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="positive">
+                            <span class="criterion-label">توفر وسائل السلامة في موقع مقر المزاول</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria12" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria12" value="لا" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="neutral-positive"> <span class="criterion-label">التنقل
+                                بين المنازل للرقية الشرعية أو الطب الشعبي</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria13" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria13" value="لا" required> لا</label>
+                            </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="negative">
+                            <span class="criterion-label">وجود أذى من المزاول لجيرانه مثل ازدحام السيارات أمام المقر أو خلاف
+                                ذلك</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria14" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria14" value="لا" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="positive">
+                            <span class="criterion-label">الالتزام بالإجراءات الاحترازية والتباعد الاجتماعي</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria15" value="نعم" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria15" value="لا" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                    </div>
+
+                    <div id="final-evaluation"></div>
+
+                    <div class="members-section">
+                        <h3>أسماء أعضاء اللجنة المشاركين في الزيارة وتوقيعاتهم</h3>
+
+                        <div class="member-input">
+                            <img src="iemg/وزارة الشؤون الاسلامية.svg" alt="شعار وزارة الشؤون الإسلامية" class="member-logo">
+                            <div class="member-details">
+                                <label for="member_islamic_affairs">مندوب فرع وزارة الشؤون الإسلامية والدعوة والإرشاد بمحافظة
+                                    جدة:</label>
+                                <input type="text" id="member_islamic_affairs" name="member_islamic_affairs">
+
+                                <label for="signature_canvas_member1">🖋️ التوقيع:</label>
+                                <canvas id="signature_canvas_member1" class="signature-pad"></canvas>
+                                <button type="button" class="clear-signature"
+                                    data-canvas-id="signature_canvas_member1">مسح</button>
+                                <input type="hidden" id="signature_member1" name="signature_member1">
+
+                                <label for="date_member1">🗓️ التاريخ:</label>
+                                <input type="text" id="date_member1" name="date_member1">
+                                </div>
+                        </div>
+
+                        <div class="member-input">
+                            <img src="iemg/شعار هيئة الأمر بالمعروف.svg" alt="شعار هيئة الامر بالمعروف"
+                                class="member-logo">
+                            <div class="member-details">
+                                <label for="member_haia">مندوب فرع هيئة الامر بالمعروف والنهي عن المنكر بمحافظة
+                                    جدة:</label>
+                                <input type="text" id="member_haia" name="member_haia">
+
+                                <label for="signature_canvas_member2">🖋️ التوقيع:</label>
+                                <canvas id="signature_canvas_member2" class="signature-pad"></canvas>
+                                <button type="button" class="clear-signature"
+                                    data-canvas-id="signature_canvas_member2">مسح</button>
+                                <input type="hidden" id="signature_member2" name="signature_member2">
+
+                                <label for="date_member2">🗓️ التاريخ:</label>
+                                <input type="text" id="date_member2" name="date_member2">
+                                </div>
+                        </div>
+
+                        <div class="member-input">
+                            <img src="iemg/الشرطة.svg" alt="شعار البحث الجنائي" class="member-logo">
+                            <div class="member-details">
+                                <label for="member_criminal_investigation">مندوب فرع البحث الجنائي بمحافظة جدة:</label>
+                                <input type="text" id="member_criminal_investigation"
+                                    name="member_criminal_investigation">
+
+                                <label for="signature_canvas_member3">🖋️ التوقيع:</label>
+                                <canvas id="signature_canvas_member3" class="signature-pad"></canvas>
+                                <button type="button" class="clear-signature"
+                                    data-canvas-id="signature_canvas_member3">مسح</button>
+                                <input type="hidden" id="signature_member3" name="signature_member3">
+
+                                <label for="date_member3">🗓️ التاريخ:</label>
+                                <input type="text" id="date_member3" name="date_member3">
+                                </div>
+                        </div>
+
+                        <div class="member-input">
+                            <img src="iemg/Makkah Region.svg" alt="شعار اللجنة الميدانية" class="member-logo">
+                            <div class="member-details">
+                                <label for="member_committee_head">مندوب رئيس اللجنة الميدانية بمحافظة جدة:</label>
+                                <input type="text" id="member_committee_head" name="member_committee_head">
+
+                                <label for="signature_canvas_member4">🖋️ التوقيع:</label>
+                                <canvas id="signature_canvas_member4" class="signature-pad"></canvas>
+                                <button type="button" class="clear-signature"
+                                    data-canvas-id="signature_canvas_member4">مسح</button>
+                                <input type="hidden" id="signature_member4" name="signature_member4">
+
+                                <label for="date_member4">🗓️ التاريخ:</label>
+                                <input type="text" id="date_member4" name="date_member4">
+                                </div>
+                        </div>
+                    </div>
+                </div> <button type="submit">إرسال</button>
+                <button type="button" id="update-button">تعديل البيانات</button>
+                <button type="button" id="print-pdf-button">طباعة PDF</button>
+
+                <div id="msg" class="success"></div>
+            </form>
+        </div>
+
+        <div class="report-section-container"> <h2 class="report-title hidden" id="report-title">التقرير</h2>
+            <div class="report-container powerbi-container hidden" id="report-section">
+                <iframe
+                    src="https://app.powerbi.com/view?r=eyJrIjoiNzMwZmFmMmQtMDRmMS00MTlmLTk2NGQtOTIwYTcyYjJjODk3IiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&embedImagePlaceholder=true"
+                    frameborder="0" allowFullScreen="true"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>"تم تطوير هذه المنصة لخدمة المصلحة العامة وفقًا لتوجيهات إمارة منطقة مكة المكرمة."</p>
+    </footer>
+
+    <button id="scroll-to-top" class="hidden">⬆</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/ar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr-hijri/dist/flatpickr-hijri.min.js"></script>
+
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM Content Loaded.");
+
+    const inputLink = document.getElementById('input-link');
+    const reportLink = document.getElementById('report-link');
+    const inputSection = document.getElementById('input-section');
+    const reportSection = document.getElementById('report-section');
+    const reportTitle = document.getElementById('report-title');
+    const container = document.querySelector('.container');
+    const form = document.getElementById('form');
+    const finalEvaluationDiv = document.getElementById('final-evaluation');
+    const printPdfButton = document.getElementById('print-pdf-button');
+    const getLocationButton = document.getElementById('get-location-button');
+    const practitionerLocationCoordsInput = document.getElementById('practitioner_location_coords');
+    const practitionerLocationInput = document.getElementById('practitioner_location');
+    const msgDiv = document.getElementById('msg');
+    const scrollToTopButton = document.getElementById('scroll-to-top');
+
+    const signaturePads = {};
+
+    function resizeAllSignaturePads() {
+        for (const key in signaturePads) {
+            if (signaturePads[key] && signaturePads[key].resizeCanvas) {
+                signaturePads[key].resizeCanvas();
+            }
+        }
+    }
+    
+    function initSignaturePad(canvasId, hiddenInputId) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) {
+            console.error(`Canvas with ID ${canvasId} not found.`);
+            return null;
+        }
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+            console.error(`2D context not available for canvas ID ${canvasId}.`);
+            return null;
+        }
+        const hiddenInput = document.getElementById(hiddenInputId);
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        function resizeCanvas() {
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            let imageData = null;
+            if (canvas.width > 0 && canvas.height > 0) { 
+                try {
+                    imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                } catch (e) {
+                    console.warn(`Could not get image data for canvas ${canvasId} before resize:`, e);
+                }
+            }
+
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+
+            if (imageData && imageData.width > 0 && imageData.height > 0) {
+                try {
+                    ctx.putImageData(imageData, 0, 0);
+                } catch (e) {
+                    console.warn(`Could not put image data back for canvas ${canvasId} after resize:`, e);
+                }
+            }
+            
+            ctx.strokeStyle = '#1E3A8A';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+        }
+
+        if (canvas.offsetParent !== null) {
+             resizeCanvas();
+        }
+
+
+        canvas.addEventListener('mousedown', (e) => {
+            if (canvas.getAttribute('disabled') === 'true') return; 
+            isDrawing = true;
+            const currentRect = canvas.getBoundingClientRect();
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            [lastX, lastY] = [(clientX - currentRect.left) / (currentRect.width / canvas.clientWidth), (clientY - currentRect.top) / (currentRect.height / canvas.clientHeight)];
+        });
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', () => { 
+            isDrawing = false; 
+            if(hiddenInput) hiddenInput.value = canvas.getDataURL();
+        });
+        canvas.addEventListener('mouseout', () => {
+            if(isDrawing && hiddenInput) hiddenInput.value = canvas.getDataURL();
+            isDrawing = false;
+        });
+
+        canvas.addEventListener('touchstart', (e) => {
+            if (canvas.getAttribute('disabled') === 'true') return; 
+            e.preventDefault();
+            isDrawing = true;
+            const currentRect = canvas.getBoundingClientRect();
+            const clientX = e.touches[0].clientX;
+            const clientY = e.touches[0].clientY;
+            [lastX, lastY] = [(clientX - currentRect.left) / (currentRect.width / canvas.clientWidth), (clientY - currentRect.top) / (currentRect.height / canvas.clientHeight)];
+        }, { passive: false });
+        canvas.addEventListener('touchmove', (e) => {
+            if (canvas.getAttribute('disabled') === 'true') return; 
+            e.preventDefault();
+            draw(e);
+        }, { passive: false });
+        canvas.addEventListener('touchend', () => {
+            isDrawing = false;
+            if(hiddenInput) hiddenInput.value = canvas.getDataURL();
+        });
+        canvas.addEventListener('touchcancel', () => isDrawing = false);
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            if (!clientX || !clientY) return;
+
+
+            const currentRect = canvas.getBoundingClientRect();
+            const x = (clientX - currentRect.left) / (currentRect.width / canvas.clientWidth);
+            const y = (clientY - currentRect.top) / (currentRect.height / canvas.clientHeight);
+
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            [lastX, lastY] = [x, y];
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (hiddenInput) hiddenInput.value = ''; 
+        }
+
+        const clearButton = document.querySelector(`button[data-canvas-id="${canvasId}"]`);
+        if (clearButton) {
+            clearButton.addEventListener('click', clearCanvas);
+        }
+
+        canvas.getDataURL = function() {
+            if (this.width === 0 || this.height === 0) {
+                console.warn(`Canvas ID ${this.id} has zero dimensions. Cannot get image data.`);
+                return ''; 
+            }
+            // Check if canvas is empty
+            const imageData = ctx.getImageData(0, 0, this.width, this.height); 
+            let isEmpty = true;
+            for (let i = 0; i < imageData.data.length; i += 4) {
+                if (imageData.data[i + 3] !== 0) { // Check alpha channel
+                    isEmpty = false;
+                    break;
+                }
+            }
+            if (isEmpty) return ''; // Return empty string if canvas is blank
+            return this.toDataURL('image/png'); 
+        };
+        
+        canvas.fromDataURL = function(dataURL) {
+            if (!dataURL) {
+                clearCanvas();
+                return;
+            }
+            const img = new Image();
+            const dpr = window.devicePixelRatio || 1; 
+            img.onload = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                // Draw image considering dpr for correct scaling on display
+                ctx.drawImage(img, 0, 0, canvas.width / dpr, canvas.height / dpr); 
+            };
+            img.src = dataURL;
+        };
+
+        return {
+            canvas,
+            clearCanvas,
+            fromDataURL: canvas.fromDataURL, 
+            resizeCanvas 
+        };
+    }
+
+    signaturePads.member1 = initSignaturePad('signature_canvas_member1', 'signature_member1');
+    signaturePads.member2 = initSignaturePad('signature_canvas_member2', 'signature_member2');
+    signaturePads.member3 = initSignaturePad('signature_canvas_member3', 'signature_member3');
+    signaturePads.member4 = initSignaturePad('signature_canvas_member4', 'signature_member4');
+
+    const loginOverlay = document.getElementById('login-overlay');
+    const usernameInput = document.getElementById('username-input');
+    const passwordInput = document.getElementById('password-input');
+    const loginButton = document.getElementById('login-button');
+    const guestButton = document.getElementById('guest-button');
+    const loginMessage = document.getElementById('login-message');
+    const loginToggleLink = document.getElementById('login-toggle-link');
+    const logoutLink = document.getElementById('logout-link');
+
+    let currentUserRole = localStorage.getItem('userRole') || 'guest';
+
+    function updateUIForRole(role) {
+            const isGuest = role === 'guest';
+            const isAdmin = role === 'admin';
+
+            loginOverlay.style.display = 'none'; // Hide overlay once role is determined or guest/login happens
+            
+            // Links visibility
+            inputLink.style.display = 'inline-block'; // Always visible
+            reportLink.style.display = 'inline-block'; // Always visible
+            loginToggleLink.style.display = isGuest ? 'inline-block' : 'none';
+            logoutLink.style.display = isAdmin ? 'inline-block' : 'none';
+
+            // Search container visibility (always visible for both, but functionality differs)
+            document.getElementById('search-container').style.display = 'flex';
+
+            // Form elements enabling/disabling
+            form.querySelectorAll('input:not(#search-id), select, textarea, .clear-signature, #get-location-button').forEach(element => {
+                if (isAdmin) {
+                    element.removeAttribute('disabled');
+                } else {
+                    element.setAttribute('disabled', 'true');
+                }
+            });
+             // Signature canvases
+            Object.values(signaturePads).forEach(pad => {
+                if (pad && pad.canvas) {
+                    if (isAdmin) {
+                        pad.canvas.removeAttribute('disabled');
+                         pad.canvas.style.cursor = 'crosshair';
+                    } else {
+                        pad.canvas.setAttribute('disabled', 'true');
+                        pad.canvas.style.cursor = 'not-allowed';
+                    }
+                }
+            });
+
+
+            // Form action buttons
+            form.querySelector('button[type="submit"]').style.display = isAdmin ? 'inline-block' : 'none';
+            document.getElementById('update-button').style.display = isAdmin ? 'inline-block' : 'none';
+            document.getElementById('print-pdf-button').style.display = 'inline-block'; // Always visible for printing current view
+            
+            // Search button should always be enabled
+            document.getElementById('search-button').removeAttribute('disabled');
+
+
+            if (isAdmin) {
+                 // If admin, ensure input section is shown by default if nothing else dictates it
+                if (inputSection.classList.contains('hidden') && reportSection.classList.contains('hidden')) {
+                    inputSection.classList.remove('hidden');
+                    reportSection.classList.add('hidden');
+                    reportTitle.classList.add('hidden');
+                    container.style.gridTemplateColumns = '1fr'; // Ensure single column for input
+                    resizeAllSignaturePads();
+                } else if (!inputSection.classList.contains('hidden')) {
+                     resizeAllSignaturePads(); // Resize if input section is already visible
+                }
+            } else { // Guest
+                // For guests, default to input view (read-only) if no specific section is active
+                 if (inputSection.classList.contains('hidden') && reportSection.classList.contains('hidden')) {
+                    inputSection.classList.remove('hidden');
+                    reportSection.classList.add('hidden');
+                    reportTitle.classList.add('hidden');
+                    container.style.gridTemplateColumns = '1fr';
+                 } else if (reportSection.classList.contains('hidden')) { // If input section is what should be shown
+                    inputSection.classList.remove('hidden');
+                    reportSection.classList.add('hidden');
+                    reportTitle.classList.add('hidden');
+                    container.style.gridTemplateColumns = '1fr';
+                 }
+                // No need to resize signature pads for guest as they are disabled
+            }
+        }
+
+
+    loginButton.addEventListener('click', function() {
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        if (username === 'asim' && password === '7878') {
+            localStorage.setItem('userRole', 'admin');
+            currentUserRole = 'admin';
+            updateUIForRole('admin');
+            loginMessage.textContent = ''; 
+            msgDiv.textContent = 'تم تسجيل الدخول بنجاح كمسؤول.';
+            msgDiv.style.color = 'var(--secondary-color)';
+            // Ensure input section is active for admin after login
+            inputSection.classList.remove('hidden');
+            reportSection.classList.add('hidden');
+            reportTitle.classList.add('hidden');
+            container.style.gridTemplateColumns = '1fr';
+            resizeAllSignaturePads();
+
+        } else {
+            loginMessage.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة.';
+            msgDiv.textContent = ''; 
+        }
+    });
+
+    guestButton.addEventListener('click', function() {
+        localStorage.setItem('userRole', 'guest');
+        currentUserRole = 'guest';
+        updateUIForRole('guest');
+        loginMessage.textContent = ''; 
+        msgDiv.textContent = 'تم الدخول كزائر. يمكنك البحث وعرض البيانات.';
+        msgDiv.style.color = 'var(--primary-color)';
+        // Ensure input section is active for guest after choosing guest mode
+        inputSection.classList.remove('hidden');
+        reportSection.classList.add('hidden');
+        reportTitle.classList.add('hidden');
+        container.style.gridTemplateColumns = '1fr';
+    });
+
+    loginToggleLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        loginOverlay.style.display = 'flex';
+        loginMessage.textContent = '';
+        usernameInput.value = '';
+        passwordInput.value = '';
+        usernameInput.focus();
+    });
+
+    logoutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('userRole');
+        currentUserRole = 'guest';
+        clearFormAndSignatures(); // Clear form on logout
+        updateUIForRole('guest'); // This will show login overlay via loginToggleLink behavior or set to guest view
+        loginOverlay.style.display = 'flex'; // Explicitly show login overlay
+        msgDiv.textContent = 'تم تسجيل الخروج بنجاح.';
+        msgDiv.style.color = 'var(--secondary-color)';
+    });
+    
+    // Initial UI setup based on stored role or default to guest (which might show login)
+    if (!localStorage.getItem('userRole')) {
+        loginOverlay.style.display = 'flex'; // Show login if no role is stored
+    } else {
+        updateUIForRole(currentUserRole);
+    }
+
+
+    inputLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        inputSection.classList.remove('hidden');
+        reportSection.classList.add('hidden');
+        reportTitle.classList.add('hidden');
+        container.style.gridTemplateColumns = '1fr'; // Ensure single column layout
+        if (currentUserRole === 'admin') { // Resize pads only if admin and input section is shown
+            resizeAllSignaturePads();
+        }
+    });
+
+    reportLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        inputSection.classList.add('hidden');
+        reportSection.classList.remove('hidden');
+        reportTitle.classList.remove('hidden');
+        container.style.gridTemplateColumns = '1fr'; // Ensure single column layout for report too
+    });
+    
+
+    function clearFormAndSignatures() {
+        form.reset();
+        for (const key in signaturePads) {
+            if (signaturePads[key] && signaturePads[key].clearCanvas) { 
+                signaturePads[key].clearCanvas();
+            }
+        }
+        if (typeof updateEvaluationAndWarnings === "function") {
+             updateEvaluationAndWarnings(); 
+        }
+        msgDiv.textContent = ''; 
+        msgDiv.style.color = '';
+        document.getElementById('id').removeAttribute('readonly'); // Make ID field editable again if it was made readonly
+    }
+    
+    function updateEvaluationAndWarnings() {
+        let negativeConditionsMet = false;
+        const criteriaElements = form.querySelectorAll('.criterion');
+        const totalCriteria = criteriaElements.length;
+        let checkedCriteriaCount = 0;
+
+        criteriaElements.forEach(criterion => {
+            const selectedOption = criterion.querySelector('input[type="radio"]:checked');
+            const warningMessage = criterion.querySelector('.warning-message');
+
+            if (warningMessage) {
+                warningMessage.classList.add('hidden');
+            }
+
+            if (selectedOption) {
+                checkedCriteriaCount++;
+                const value = selectedOption.value;
+                const criterionType = criterion.getAttribute('data-criterion-type'); // Get type from attribute
+
+                if ( (criterionType === 'positive' && value === 'لا') || 
+                     (criterionType === 'negative' && value === 'نعم') ) {
+                    negativeConditionsMet = true;
+                    if (warningMessage) warningMessage.classList.remove('hidden');
+                }
+            }
+        });
+
+        let evaluationText = '';
+        let evaluationClass = '';
+
+        if (negativeConditionsMet) {
+            evaluationText = '❌ غير مؤهل لوجود مخالفات.';
+            evaluationClass = 'not-qualified';
+        } else if (checkedCriteriaCount === totalCriteria && totalCriteria > 0) {
+            evaluationText = '✅ مؤهل.';
+            evaluationClass = 'qualified';
+        } else if (totalCriteria > 0 && checkedCriteriaCount < totalCriteria) {
+            evaluationText = '⚠️ الرجاء إكمال جميع معايير التقييم.';
+            evaluationClass = 'needs-review';
+        } else { // No criteria or none checked
+            evaluationText = 'لم يتم تقييم المعايير بعد.';
+            evaluationClass = ''; // No specific class or 'needs-review'
+        }
+
+
+        finalEvaluationDiv.textContent = evaluationText;
+        finalEvaluationDiv.className = 'final-evaluation'; // Reset class
+        if(evaluationClass) finalEvaluationDiv.classList.add(evaluationClass);
+    }
+    form.querySelectorAll('.criterion input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', updateEvaluationAndWarnings);
+    });
+    updateEvaluationAndWarnings(); 
+
+
+    if (getLocationButton) {
+        getLocationButton.addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    practitionerLocationCoordsInput.value = `${lat}, ${lon}`;
+                    // You might want to use a geocoding service here to get a human-readable address if needed
+                    // For now, we just store the coordinates.
+                    practitionerLocationInput.value = `${lat}, ${lon}`; 
+                    msgDiv.textContent = 'تم تحديد الموقع بنجاح!';
+                    msgDiv.style.color = 'var(--secondary-color)';
+                }, function(error) {
+                    console.error("Error getting location: ", error);
+                    msgDiv.textContent = `خطأ في تحديد الموقع: ${error.message}`;
+                    msgDiv.style.color = 'var(--no-color)';
+                });
+            } else {
+                msgDiv.textContent = "المتصفح لا يدعم تحديد المواقع.";
+                msgDiv.style.color = 'var(--warning-color)';
+            }
+        });
+    }
+    
+    const searchIdInput = document.getElementById('search-id');
+    const searchButton = document.getElementById('search-button');
+    // const editButton = document.getElementById('update-button'); // تم تعريفه أعلاه ك update-button
+
+    searchButton.addEventListener('click', function() {
+        const practitionerId = searchIdInput.value.trim();
+        if (!practitionerId) {
+            msgDiv.textContent = "⚠️ الرجاء إدخال هوية المزاول للبحث.";
+            msgDiv.style.color = 'var(--warning-color)';
+            return;
+        }
+        // Simulating data fetch - In a real app, this would be an API call
+        const data = localStorage.getItem(`practitioner_${practitionerId}`);
+        if (data) {
+            const practitionerData = JSON.parse(data);
+            Object.keys(practitionerData).forEach(key => {
+                const field = form.elements[key];
+                if (field) {
+                    if (field.type === 'radio') {
+                        // For radio buttons, find the one with matching name and value
+                        form.querySelectorAll(`input[name="${key}"][value="${practitionerData[key]}"]`).forEach(rb => rb.checked = true);
+                    } else if (field.type === 'checkbox') {
+                        field.checked = practitionerData[key];
+                    } else if (key.startsWith('signature_member')) {
+                        const canvasId = `signature_canvas_${key.replace('signature_', '')}`;
+                        if(signaturePads[key.replace('signature_', '')] && signaturePads[key.replace('signature_', '')].fromDataURL) {
+                            signaturePads[key.replace('signature_', '')].fromDataURL(practitionerData[key]);
+                        }
+                    } else {
+                        field.value = practitionerData[key];
+                    }
+                }
+            });
+            msgDiv.textContent = `تم تحميل بيانات المزاول: ${practitionerData.name || practitionerId}.`;
+            msgDiv.style.color = 'var(--secondary-color)';
+            document.getElementById('id').setAttribute('readonly', 'true'); // Make ID readonly after search
+            updateEvaluationAndWarnings(); // Update evaluation based on loaded criteria
+            if (currentUserRole === 'admin') resizeAllSignaturePads(); // Resize pads if admin
+        } else {
+            msgDiv.textContent = `لا توجد بيانات للمزاول برقم الهوية: ${practitionerId}. يمكنك إدخال بيانات جديدة.`;
+            msgDiv.style.color = 'var(--warning-color)';
+            clearFormAndSignatures(); // Clear form for new entry
+            form.elements['id'].value = practitionerId; // Pre-fill the ID for new entry
+            document.getElementById('id').removeAttribute('readonly');
+        }
+    });
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        if (currentUserRole !== 'admin') {
+            msgDiv.textContent = 'ليس لديك صلاحية لإرسال البيانات.';
+            msgDiv.style.color = 'var(--no-color)';
+            return;
+        }
+
+        const formData = new FormData(form);
+        const data = {};
+        let allCriteriaChecked = true;
+        const criteriaElements = form.querySelectorAll('.criterion');
+        if (criteriaElements.length > 0) {
+            criteriaElements.forEach(criterion => {
+                const radioName = criterion.querySelector('input[type="radio"]').name;
+                if (!formData.has(radioName)) {
+                    allCriteriaChecked = false;
+                }
+            });
+        }
+
+
+        if (!allCriteriaChecked && criteriaElements.length > 0) {
+            msgDiv.textContent = '⚠️ يرجى تقييم جميع المعايير قبل الإرسال.';
+            msgDiv.style.color = 'var(--warning-color)';
+            // Scroll to the criteria section
+            const criteriaSection = document.querySelector('.criteria-section');
+            if (criteriaSection) {
+                criteriaSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            return; 
+        }
+
+
+        for (let [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+        
+        // Add signature data
+        for(const padKey in signaturePads){
+            if(signaturePads[padKey] && signaturePads[padKey].canvas){
+                 const hiddenInputId = signaturePads[padKey].canvas.id.replace('signature_canvas_', 'signature_');
+                 data[hiddenInputId] = signaturePads[padKey].canvas.getDataURL(); // Get data from canvas directly
+            }
+        }
+
+
+        // Store data in localStorage (replace with actual API call in a real app)
+        const practitionerId = data.id;
+        if (!practitionerId) {
+            msgDiv.textContent = 'رقم الهوية مطلوب لحفظ البيانات.';
+            msgDiv.style.color = 'var(--no-color)';
+            return;
+        }
+        localStorage.setItem(`practitioner_${practitionerId}`, JSON.stringify(data));
+        
+        msgDiv.textContent = 'تم إرسال/حفظ البيانات بنجاح!';
+        msgDiv.style.color = 'var(--secondary-color)';
+        document.getElementById('id').setAttribute('readonly', 'true'); // Make ID readonly after successful submit
+        // setTimeout(clearFormAndSignatures, 2000); // Optionally clear form after a delay
+    });
+
+    document.getElementById('update-button').addEventListener('click', function() {
+        if (currentUserRole !== 'admin') {
+            msgDiv.textContent = 'ليس لديك صلاحية لتعديل البيانات.';
+            msgDiv.style.color = 'var(--no-color)';
+            return;
+        }
+        const practitionerId = form.elements['id'].value;
+        if (!practitionerId || !localStorage.getItem(`practitioner_${practitionerId}`)) {
+            msgDiv.textContent = 'يرجى البحث عن مزاول أولاً لتعديل بياناته، أو قم بالإرسال لحفظ البيانات الجديدة.';
+            msgDiv.style.color = 'var(--warning-color)';
+            return;
+        }
+        // Trigger form submission logic which now handles saving
+        form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+        // The message will be "تم إرسال/حفظ البيانات بنجاح!" from the submit handler
+    });
+
+    // --- وظيفة زر طباعة PDF ---
+    printPdfButton.addEventListener('click', function() {
+        const elementToPrint = document.getElementById('printable-form-content');
+        const practitionerId = document.getElementById('id').value || "بيانات_مزاول";
+        const practitionerName = document.getElementById('name').value || "غير_معروف";
+
+        if (!elementToPrint) {
+            console.error('Error: Element with ID "printable-form-content" not found.');
+            msgDiv.textContent = 'خطأ: لم يتم العثور على المحتوى المخصص للطباعة.';
+            msgDiv.style.color = 'var(--no-color)';
+            return;
+        }
+
+        msgDiv.textContent = 'يتم تجهيز ملف PDF للطباعة، يرجى الانتظار...';
+        msgDiv.style.color = 'var(--primary-color)';
+
+        const opt = {
+            margin:       [15, 10, 15, 10], // [top, left, bottom, right] in mm - increased top/bottom margin
+            filename:     `محضر_${practitionerName.replace(/\s+/g, '_')}_${practitionerId}.pdf`,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, logging: false, dpi: 192, letterRendering: true, useCORS: true, scrollY: -window.scrollY },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+            pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
+        };
+        
+        // Temporarily modify elements for PDF generation
+        const elementsToHideForPdf = form.querySelectorAll('button:not(#print-pdf-button), .clear-signature'); // Hide action buttons
+        elementsToHideForPdf.forEach(el => el.classList.add('pdf-hide-temp'));
+
+        const tempStyle = document.createElement('style');
+        tempStyle.innerHTML = `
+            .pdf-hide-temp { display: none !important; }
+            #printable-form-content input, 
+            #printable-form-content textarea, 
+            #printable-form-content select { 
+                border: 1px solid #ccc !important; /* Add a light border to see fields in PDF */
+                background-color: #f9f9f9 !important; /* Light background for fields */
+            }
+            #printable-form-content .signature-pad {
+                 border: 1px dashed #ccc !important; /* Visual cue for signature area if empty */
+            }
+             /* Ensure signature images are visible if canvases are replaced by images by html2pdf */
+            #printable-form-content .signature-pad img {
+                max-width: 100%; height: auto; display: block;
+            }
+        `;
+        document.head.appendChild(tempStyle);
+
+
+        html2pdf().from(elementToPrint).set(opt).save().then(() => {
+            msgDiv.textContent = 'تم إنشاء ملف PDF بنجاح.';
+            msgDiv.style.color = 'var(--secondary-color)';
+            elementsToHideForPdf.forEach(el => el.classList.remove('pdf-hide-temp'));
+            document.head.removeChild(tempStyle);
+        }).catch((error) => {
+            console.error('Error generating PDF:', error);
+            msgDiv.textContent = 'حدث خطأ أثناء إنشاء ملف PDF.';
+            msgDiv.style.color = 'var(--no-color)';
+            elementsToHideForPdf.forEach(el => el.classList.remove('pdf-hide-temp'));
+            document.head.removeChild(tempStyle);
+        });
+    });
+
+
+    flatpickr("#dob", {
+        locale: "ar",
+        dateFormat: "Y-m-d",
+        altInput: true,
+        altFormat: "j F Y", // More readable format
+        allowInput: true
+    });
+    flatpickr("#meeting_date", {
+        locale: "ar",
+        dateFormat: "Y-m-d",
+        defaultDate: "today", // Default to today
+        altInput: true,
+        altFormat: "j F Y",
+        allowInput: true
+    });
+    // Member dates
+    const memberDateInputs = ['#date_member1', '#date_member2', '#date_member3', '#date_member4'];
+    memberDateInputs.forEach(selector => {
+        flatpickr(selector, {
+            locale: "ar",
+            dateFormat: "Y-m-d",
+            defaultDate: "today",
+            altInput: true,
+            altFormat: "j F Y",
+            allowInput: true
+        });
+    });
+
+
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 200) { 
+            scrollToTopButton.classList.add('visible');
+        } else {
+            scrollToTopButton.classList.remove('visible');
+        }
+    });
+
+    scrollToTopButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Call on load to set initial state
+    // updateUIForRole(currentUserRole); // Already called after login/guest choice logic
+    if (!localStorage.getItem('userRole')) { // If no role, and overlay is shown, ensure form is disabled initially
+        updateUIForRole('guest'); // Set to guest view (disabled form) until login
+    }
+
+
+}); // End DOMContentLoaded
+    </script>
+</body>
+
+</html>
