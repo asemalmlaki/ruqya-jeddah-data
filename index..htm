@@ -1,0 +1,2509 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>نموذج لجنة الرقية الشرعية - تصميم جديد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/themes/material_blue.css">
+    <link rel="icon" href="iemg/ICON1.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="iemg/ICON1.svg">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary-color: #2C7A7B; /* Sophisticated Teal */
+            --secondary-color: #F6AD55; /* Warm Amber/Gold */
+            --background-color: #F7FAFC; /* Light Grey */
+            --text-color: #2D3748; /* Dark Charcoal Grey */
+            --card-background: #FFFFFF; /* White */
+            --shadow-color: rgba(45, 55, 72, 0.1); /* Softer Shadow */
+            --button-text-color: #FFFFFF;
+            --focus-border-color: var(--primary-color);
+            --yes-color: #38A169; /* Clear Green */
+            --no-color: #E53E3E; /* Clear Red */
+            --warning-color: #DD6B20; /* Burnt Orange */
+            --light-primary-color: #E6FFFA; /* Light Teal for backgrounds/hovers */
+            --light-secondary-color: #FFF5E0; /* Light Amber for backgrounds/hovers */
+            --border-color: #E2E8F0; /* Light grey border */
+            --input-background: #FFFFFF;
+            --input-focus-background: #FFFFFF;
+            --disabled-opacity: 0.7;
+            --signature-stroke-color: #1E3A8A; /* Blue for signature */
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            color: var(--text-color);
+            line-height: 1.7;
+            direction: rtl;
+            text-align: right;
+            font-weight: 400;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #319795 100%); /* Teal Gradient */
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            color: var(--button-text-color);
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        header img {
+            height: 110px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        header h1 {
+            font-size: 2em; /* Increased size */
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            text-align: center;
+        }
+
+        .location-highlight {
+            color: var(--secondary-color); /* Amber highlight */
+            font-weight: 800;
+        }
+
+        .header-links {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .header-links a {
+            padding: 12px 25px;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500; /* Medium weight */
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border-radius: 8px; /* Softer radius */
+            background-color: var(--card-background);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px var(--shadow-color);
+        }
+
+        .header-links a:hover, .header-links a.active {
+            color: var(--button-text-color);
+            background-color: var(--secondary-color); /* Amber hover */
+            border-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(246, 173, 85, 0.4);
+        }
+
+        .container {
+            max-width: 1100px; /* Slightly wider for more space */
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            gap: 35px;
+        }
+
+        .form-container,
+        .report-container {
+            background-color: var(--card-background);
+            padding: 35px; /* Increased padding */
+            border-radius: 12px; /* More rounded */
+            box-shadow: 0 6px 20px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-weight: 700; /* Bolder labels */
+            font-size: 1em;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px; /* Increased padding */
+            margin-bottom: 25px; /* Increased margin */
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Tajawal', sans-serif;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+            background-color: var(--input-background);
+            font-size: 1em;
+            color: var(--text-color);
+        }
+        input::placeholder, textarea::placeholder {
+            color: #A0AEC0; /* Lighter placeholder text */
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--focus-border-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44, 122, 123, 0.2); /* Focus ring */
+            background-color: var(--input-focus-background);
+        }
+
+        input:disabled, select:disabled, textarea:disabled {
+            background-color: #F1F1F1;
+            opacity: var(--disabled-opacity);
+            cursor: not-allowed;
+        }
+
+
+        textarea {
+            resize: vertical;
+            min-height: 160px;
+        }
+
+        button, .custom-file-button { /* Unified button styling */
+            color: var(--button-text-color);
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            margin-right: 15px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+         button:disabled, .custom-file-button:disabled {
+            background-color: #A0AEC0 !important;
+            box-shadow: none;
+            cursor: not-allowed;
+            opacity: var(--disabled-opacity);
+        }
+
+
+        button:hover, .custom-file-button:hover {
+            opacity: 0.9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px var(--shadow-color);
+        }
+
+        button:active, .custom-file-button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px var(--shadow-color);
+        }
+
+        #search-button {
+            background-color: var(--primary-color);
+        }
+        #search-button:hover {
+            background-color: #256A69; /* Darker Teal */
+        }
+
+        button[type="submit"] {
+            background-color: var(--secondary-color);
+        }
+        button[type="submit"]:hover {
+            background-color: #E0973D; /* Darker Amber */
+        }
+
+        #update-button {
+            background-color: var(--primary-color);
+        }
+        #update-button:hover {
+            background-color: #256A69;
+        }
+
+        #print-pdf-button {
+            background-color: #718096; /* Slate Grey */
+        }
+        #print-pdf-button:hover {
+            background-color: #4A5568; /* Darker Slate */
+        }
+
+        #get-location-button {
+            background-color: #4299E1; /* Blue */
+        }
+        #get-location-button:hover {
+            background-color: #2B6CB0; /* Darker Blue */
+        }
+
+        .signature-pad {
+            border: 1px dashed var(--border-color); /* Dashed border */
+            border-radius: 8px;
+            background-color: #FDFDFD; /* Slightly off-white */
+            cursor: crosshair;
+            touch-action: none;
+            width: 100%;
+            height: 160px; /* Increased height */
+            margin-bottom: 10px;
+        }
+        canvas[disabled='true'] {
+            cursor: not-allowed !important;
+            background-color: #F1F1F1 !important;
+            opacity: var(--disabled-opacity);
+        }
+
+
+        .clear-signature {
+            background-color: var(--no-color);
+            color: white;
+            padding: 8px 15px; /* Adjusted padding */
+            font-size: 0.9em;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            display: inline-block; /* Fit content */
+            width: auto;
+        }
+        .clear-signature:hover {
+            background-color: #C53030; /* Darker Red */
+        }
+
+        .success, #msg { /* Unified message styling */
+            text-align: center;
+            font-weight: 500; /* Medium weight */
+            margin-top: 25px;
+            font-size: 1.1em;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        #msg:empty { display: none; } /* Hide if no message */
+
+        .criteria-section, .members-section, #attachments-section { /* Unified section styling */
+            background-color: var(--card-background);
+            padding: 30px; /* Increased padding */
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .criteria-section h3, .members-section h3, #attachments-section h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 1.6em; /* Larger section titles */
+            font-weight: 700;
+            border-bottom: 2px solid var(--secondary-color); /* Amber underline */
+            padding-bottom: 12px;
+        }
+
+        .criterion {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            background-color: #FDFDFD; /* Slightly off-white */
+            transition: box-shadow 0.3s ease;
+        }
+        .criterion:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .criterion:last-child {
+            margin-bottom: 0;
+        }
+
+        .criterion-label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 500; /* Medium weight */
+            color: var(--text-color);
+            font-size: 1.05em;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: flex;
+            gap: 25px; /* Increased gap */
+            margin-top: 10px;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Increased gap */
+            font-weight: 500;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+        .options label:hover {
+            background-color: var(--light-primary-color);
+        }
+
+        .options input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            margin: 0; /* Reset margin */
+            transition: border-color 0.2s, background-color 0.2s;
+            cursor: pointer;
+            position: relative;
+        }
+        .options input[type="radio"]:checked {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+        }
+        .options input[type="radio"]:checked::before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .criterion .options label.yes { color: var(--yes-color); font-weight: 700; }
+        .criterion .options label.no { color: var(--no-color); font-weight: 700; }
+        .criterion .options input[type="radio"]:checked.yes-radio { border-color: var(--yes-color); background-color: var(--yes-color); }
+        .criterion .options input[type="radio"]:checked.no-radio { border-color: var(--no-color); background-color: var(--no-color); }
+
+
+        .warning-message {
+            color: var(--warning-color);
+            font-weight: 700;
+            margin-top: 12px;
+            font-size: 0.95em;
+            padding: 8px;
+            background-color: var(--light-secondary-color);
+            border-radius: 6px;
+            border-right: 4px solid var(--warning-color);
+        }
+        .warning-message.hidden { display: none; }
+
+        footer {
+            margin-top: 50px;
+            padding: 25px;
+            text-align: center;
+            background-color: var(--text-color); /* Darker footer */
+            color: var(--background-color); /* Light text on dark bg */
+            font-size: 0.95em;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        footer img { display: none; } /* Kept as is */
+
+
+        .search-container {
+            margin-bottom: 30px;
+            padding: 25px;
+            background-color: #EDF2F7; /* Slightly different light grey */
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            display: flex;
+            gap: 20px; /* Increased gap */
+            align-items: center;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            flex-wrap: wrap; /* Allow wrapping */
+        }
+        .search-container label { font-weight: 500; margin-bottom: 0; }
+        .search-container input[type="text"] { flex-grow: 1; margin-bottom: 0; min-width: 200px; }
+        .search-container button { margin-right: 0; flex-shrink: 0; }
+
+
+        .powerbi-container { margin-top: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px var(--shadow-color); }
+        .powerbi-container iframe { display: block; width: 100%; height: 650px; border: none; }
+
+        .hidden { display: none !important; } /* More specific to override */
+
+        .member-input {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            background-color: #FDFDFD;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            flex-wrap: wrap; /* Allow wrapping */
+        }
+        .member-logo {
+            height: 75px; /* Slightly larger */
+            width: auto;
+            flex-shrink: 0;
+            margin-top: 5px;
+            border-radius: 6px; /* Rounded corners for logos */
+            object-fit: contain;
+        }
+        .member-details { display: flex; flex-direction: column; flex-grow: 1; min-width: 0; }
+        .member-details label { margin-bottom: 6px; font-weight: 500; font-size: 1em; }
+        .member-details input[type="text"], .member-details input[type="date"] { margin-bottom: 12px; }
+
+
+        .report-title {
+            color: var(--primary-color);
+            font-size: 2em; /* Larger report title */
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            margin-top: 0;
+        }
+
+        #final-evaluation {
+            margin-top: 30px;
+            margin-bottom: 40px;
+            font-size: 1.3em; /* Larger final evaluation text */
+            font-weight: 700;
+            text-align: center;
+            padding: 20px; /* Increased padding */
+            border-radius: 10px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        #final-evaluation.qualified { background-color: #C6F6D5; color: #2F855A; border-left: 5px solid var(--yes-color); } /* Green tones */
+        #final-evaluation.needs-review { background-color: #FEEBC8; color: #C05621; border-left: 5px solid var(--warning-color); } /* Orange tones */
+        #final-evaluation.not-qualified { background-color: #FED7D7; color: #C53030; border-left: 5px solid var(--no-color); } /* Red tones */
+        #final-evaluation:empty { display: none; }
+
+
+        #scroll-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            padding: 0; /* Remove padding for perfect circle with icon */
+            width: 50px; /* Fixed width */
+            height: 50px; /* Fixed height */
+            background-color: var(--secondary-color); /* Amber background */
+            color: var(--button-text-color);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.8em; /* Larger icon */
+            line-height: 50px; /* Center icon vertically */
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            opacity: 0; /* Hidden by default */
+            visibility: hidden;
+        }
+        #scroll-to-top.visible { opacity: 1; visibility: visible; }
+        #scroll-to-top:hover { background-color: #E0973D; transform: scale(1.1); }
+
+
+        #login-overlay {
+            background-color: rgba(0,0,0,0.8); /* Darker overlay */
+        }
+        #login-overlay > div {
+            padding: 30px; /* Increased padding */
+            max-width: 380px; /* Wider login box */
+            border-radius: 12px;
+        }
+        #login-overlay h2 { font-size: 1.8em; margin-bottom: 20px;}
+        #login-overlay input[type="text"], #login-overlay input[type="password"] {
+            font-size: 1em; padding: 14px; margin-bottom: 18px; border-radius: 8px;
+        }
+        #login-overlay button {
+            padding: 12px 20px; font-size: 1em; margin-right: 8px; margin-left: 8px;
+            margin-bottom: 12px; min-width: 120px;
+        }
+        #login-button { background-color: var(--secondary-color); }
+        #login-button:hover { background-color: #E0973D; }
+        #guest-button { background-color: #718096; }
+        #guest-button:hover { background-color: #4A5568; }
+        #login-message { margin-top: 18px; font-size: 0.95em; }
+
+
+        /* Attachment Styling */
+        .custom-file-button {
+            background-color: var(--primary-color);
+        }
+        .custom-file-button:hover {
+            background-color: #256A69;
+        }
+        .label-warning {
+            color: var(--warning-color);
+            font-weight: 500;
+            font-size: 0.9em;
+            display: block;
+            margin-top: 8px;
+            margin-bottom: 12px;
+        }
+        .image-previews-container {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px; /* Increased gap */
+            min-height: 60px; /* Slightly taller */
+            border: 2px dashed var(--border-color); /* More prominent dash */
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #F9F9F9; /* Light bg for contrast */
+        }
+        .image-previews-container:empty::before {
+            content: "لم يتم اختيار صور بعد. يمكنك إضافة ما يصل إلى 5 صور.";
+            color: #777;
+            font-style: italic;
+            display: block;
+            text-align: center;
+            width: 100%;
+            font-size: 0.95em;
+            padding: 10px 0;
+        }
+        .image-preview-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--card-background);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            transition: transform 0.2s ease;
+        }
+        .image-preview-item:hover {
+            transform: translateY(-3px);
+        }
+        .image-preview-item img {
+            width: 110px; /* Larger previews */
+            height: 110px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            object-fit: cover;
+            display: block;
+            background-color: #EDF2F7;
+        }
+        .delete-image-btn {
+            background-color: var(--no-color);
+            color: white;
+            padding: 6px 10px;
+            font-size: 0.85em;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 8px;
+            display: block;
+            width: auto; /* Fit content */
+            transition: background-color 0.2s;
+        }
+        .delete-image-btn:hover {
+            background-color: #C53030;
+        }
+        #image-count-message {
+            direction: ltr; /* Keep LTR for numbers */
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+            font-weight: 700;
+            font-size: 0.9em;
+            color: var(--primary-color);
+        }
+
+        /* Responsive Adjustments */
+        @media screen and (max-width: 900px) {
+            .container { grid-template-columns: 1fr !important; }
+            header h1 { font-size: 1.7em; }
+            .header-links a { font-size: 1em; padding: 10px 20px; }
+        }
+
+        @media screen and (max-width: 768px) { /* Tablet and large phone adjustments */
+            .form-container, .report-container, .criteria-section, .members-section, #attachments-section, .search-container {
+                padding: 25px;
+            }
+            input, select, textarea { padding: 12px; margin-bottom: 20px; }
+            button, .custom-file-button { padding: 12px 24px; font-size: 1em; }
+            .member-input { flex-direction: column; align-items: center; text-align: center; }
+            .member-logo { margin-bottom: 10px; }
+            .location-input-group { flex-direction: column; }
+            .location-input-group input, .location-input-group button { width: 100%; margin-left:0; margin-right:0;}
+            .options { gap: 15px; }
+            .options label { padding: 6px 10px; }
+            .image-preview-item img { width: 90px; height: 90px; }
+            .delete-image-btn { padding: 5px 8px; font-size: 0.8em;}
+        }
+
+        @media screen and (max-width: 600px) { /* General mobile adjustments */
+            body { line-height: 1.6; }
+            header { padding: 20px 15px; }
+            header img { height: 90px; }
+            header h1 { font-size: 1.5em; margin-bottom: 15px; }
+            .header-links { gap: 10px; margin-bottom: 20px; }
+            .header-links a { flex-basis: calc(50% - 10px); text-align: center; font-size: 0.95em; padding: 10px 15px;}
+
+            .form-container, .report-container, .criteria-section, .members-section, #attachments-section, .search-container {
+                padding: 20px; margin: 15px 0;
+            }
+            label { font-size: 0.95em; }
+            input, select, textarea { padding: 12px; margin-bottom: 18px; font-size: 0.95em;}
+            button, .custom-file-button { width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; margin-bottom: 12px !important; font-size: 1em !important; padding: 12px 20px !important; }
+            button:last-child { margin-bottom: 0 !important; }
+
+            .form-container > form > div > button, /* Target buttons inside the flex wrapper */
+            .form-container > form > div > button[type="submit"],
+            .form-container > form > div > #update-button,
+            .form-container > form > div > #print-pdf-button {
+                 width: 100% !important;
+                 margin-left: 0 !important;
+                 margin-right: 0 !important;
+                 margin-bottom: 12px !important;
+            }
+            .form-container > form > div > button:last-child { margin-bottom: 0 !important; }
+
+
+            .container { padding: 0 15px; gap: 25px; }
+
+            .search-container { flex-direction: column; gap: 15px; }
+            .search-container input[type="text"], .search-container button { width: 100%; }
+            
+            .criteria-section h3, .members-section h3, #attachments-section h3 { font-size: 1.4em; margin-bottom: 20px; padding-bottom: 10px; }
+            .criterion { padding: 15px; }
+            .criterion-label { font-size: 1em;}
+            .options { flex-direction: column; align-items: flex-start; gap: 10px;} /* Stack radio options on small screens */
+
+            #final-evaluation.needs-review, #final-evaluation { font-size: 1.1em; padding: 15px; }
+            #scroll-to-top { width: 45px; height: 45px; font-size: 1.6em; line-height: 45px; bottom: 15px; right: 15px;}
+            #login-overlay > div { padding: 20px; width: 90%; }
+            #login-overlay h2 { font-size: 1.6em; }
+            #login-overlay button { width: calc(50% - 10px); min-width: auto;}
+
+            .image-previews-container { padding: 10px; gap: 10px; }
+            .image-preview-item img { width: 80px; height: 80px; }
+        }
+
+        @media screen and (max-width: 380px) { /* Smaller mobile adjustments */
+             header h1 { font-size: 1.3em; }
+             .header-links a { font-size: 0.9em; padding: 8px 10px; }
+             .form-container, .report-container, .criteria-section, .members-section, #attachments-section, .search-container {
+                padding: 15px;
+            }
+            .criterion-label { font-size: 0.95em;}
+            #final-evaluation.needs-review, #final-evaluation { font-size: 1em; padding: 12px; }
+            #login-overlay > div { padding: 15px; }
+            #login-overlay button { width: 100%; margin-left: 0; margin-right: 0; }
+        }
+
+
+        /* Print Styles - Refined for new design */
+@media print {
+    :root {
+        --primary-color: #000000;
+        --secondary-color: #333333;
+        --text-color: #000000;
+        --card-background: #FFFFFF;
+        --border-color: #AAAAAA;
+    }
+
+    html, body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #fff !important;
+        color: black !important;
+        font-family: 'Tajawal', sans-serif !important;
+        font-size: 9.5pt !important; /* Slightly reduced base font size for better fit */
+        line-height: 1.3 !important; /* Adjusted line height for print */
+    }
+
+    /* Universal box-sizing for print for easier layout management */
+    #printable-form-content,
+    #printable-form-content *,
+    #printable-form-content *::before,
+    #printable-form-content *::after {
+        box-sizing: border-box !important;
+        -webkit-print-color-adjust: exact !important; /* Ensures background colors print if needed by specific rules */
+        color-adjust: exact !important;
+    }
+
+    header, footer, .header-links, .search-container, button, .custom-file-button,
+    .clear-signature, #msg, .report-section-container, #scroll-to-top,
+    #attachments-section #visit_attachments_warning_label,
+    #attachments-section #image-count-message,
+    .image-previews-container:empty::before, /* Handled by JS for print output */
+    .delete-image-btn, #login-overlay,
+    .form-container > form > div[style*="flex-wrap: wrap"], /* Hide screen button wrapper */
+    .location-input-group button, /* Hide "Get Location" button */
+    .member-logo, /* Hide member logos */
+    .signature-pad /* Hide canvas, show img.signature-image instead */
+    {
+        display: none !important;
+    }
+
+    #input-section, /* This is the overall container for the form content */
+    #printable-form-content { /* This is the specific div being printed */
+        display: block !important;
+        width: 100% !important; /* This is effectively the page width for content */
+        margin: 0 auto !important;
+        padding: 10mm !important; /* Page margins: 10mm top/bottom, 10mm left/right */
+        box-shadow: none !important;
+        border: none !important;
+        background-color: transparent !important;
+        overflow: hidden !important; /* Prevent children from visibly overflowing page bounds */
+    }
+
+    .form-container { /* Resetting any form container specific styles that might interfere */
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        background-color: transparent !important;
+    }
+
+    /* General form elements styling within printable area */
+    #printable-form-content label {
+        display: block !important; /* Stack labels above their inputs/elements */
+        font-weight: bold !important;
+        margin-top: 5px !important; /* Add some space above labels */
+        margin-bottom: 3px !important;
+        padding-left: 0 !important;
+        font-size: 9.5pt !important; /* Consistent with body font size */
+        color: black !important;
+        line-height: 1.4 !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    #printable-form-content input[type="text"],
+    #printable-form-content input[type="date"],
+    #printable-form-content select,
+    #printable-form-content textarea {
+        width: 100% !important; /* Make these input types take full width of their container */
+        display: block !important; /* Ensure they are on their own line */
+        padding: 3px 4px !important; /* Adjusted padding */
+        margin-bottom: 8px !important; /* Spacing below inputs */
+        border: 1px solid #b0b0b0 !important; /* Slightly darker border for print */
+        background-color: #fdfdfd !important; /* Lighter background */
+        font-family: 'Tajawal', sans-serif !important;
+        font-size: 9.5pt !important;
+        color: black !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    
+    #printable-form-content textarea {
+        min-height: 60px !important; /* Adjust min-height for print if needed */
+        resize: none !important; /* No resize handle in print */
+    }
+
+    #printable-form-content select {
+        padding-right: 20px !important; /* Space for arrow */
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23555' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") !important;
+        background-repeat: no-repeat !important;
+        /* For RTL, arrow typically on the left. If visual is on right, use calc(100% - 10px) */
+        background-position: left 0.6em center !important;
+        background-size: 0.6em auto !important;
+    }
+    
+    /* Headings */
+    #printable-form-content h1, 
+    #printable-form-content h2, 
+    #printable-form-content h3 {
+        color: black !important;
+        border-bottom: 1px solid #aeaeae !important;
+        padding-bottom: 4px !important;
+        margin-top: 16px !important;
+        margin-bottom: 8px !important;
+        font-size: 11pt !important; /* Adjusted heading size */
+        page-break-after: avoid !important;
+    }
+    #printable-form-content h3 { font-size: 10pt !important;}
+
+    /* Sections Styling */
+    .criteria-section, .members-section, #attachments-section {
+        padding: 8px 2px !important; /* Minimal horizontal padding */
+        border: 1px solid #c0c0c0 !important;
+        margin-bottom: 12px !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* Evaluation Criteria Item */
+    .criterion {
+        padding: 6px !important;
+        border: 1px dashed #d0d0d0 !important;
+        margin-bottom: 8px !important;
+        box-shadow: none !important;
+        background-color: transparent !important; /* No specific background for criterion item */
+        page-break-inside: avoid !important;
+    }
+
+    .criterion-label { /* Label for each criterion text */
+        display: block !important;
+        font-weight: normal !important;
+        font-size: 9.5pt !important;
+        margin-bottom: 5px !important;
+        line-height: 1.4 !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word; /* Crucial for long criteria text */
+    }
+
+    .options { /* Container for Yes/No radio buttons */
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 5px 10px !important; /* Reduced gap */
+        margin-top: 4px !important;
+        align-items: center;
+    }
+
+    #printable-form-content .options label { /* Yes/No text labels */
+        font-weight: normal !important;
+        padding: 1px 0 !important;
+        margin-right: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        margin-bottom: 0 !important; /* Override general label margin */
+        margin-top: 0 !important; /* Override general label margin */
+        font-size: 9.5pt !important;
+    }
+
+    #printable-form-content .options input[type="radio"] {
+        display: inline-block !important;
+        width: auto !important;
+        margin-left: 4px !important; /* For RTL: space after (visual right) radio button */
+        margin-right: 2px !important; /* For RTL: space before (visual left) radio button */
+        vertical-align: middle;
+        padding: 0 !important;
+        margin-bottom: 0 !important; /* Override general input margin */
+        border: 1px solid #777 !important; /* Visible border for radio */
+        background-color: #fff !important;
+    }
+     /* Basic custom radio appearance for print if needed, else rely on browser default for print */
+    #printable-form-content .options input[type="radio"] {
+        appearance: none;
+        -webkit-appearance: none;
+        border-radius: 50%;
+        width: 12px !important; /* Size of custom radio */
+        height: 12px !important;
+        position: relative;
+        top: 2px; /* Align with text */
+    }
+    #printable-form-content .options input[type="radio"]:checked {
+        background-color: #555 !important;
+        border-color: #333 !important;
+    }
+    #printable-form-content .options input[type="radio"]:checked::after {
+        content: '';
+        display: block;
+        border-radius: 50%;
+        width: 6px;
+        height: 6px;
+        background: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Member Input Section */
+    .member-input {
+        border: 1px solid #c0c0c0 !important;
+        padding: 8px !important;
+        margin-bottom: 10px !important;
+        page-break-inside: avoid !important;
+    }
+    /* .member-details styling is mostly fine as it stacks items vertically */
+
+    /* Signature Images (displayed from JS-generated DataURLs) */
+    #printable-form-content img.signature-image {
+        max-width: 110px !important; /* Adjusted width */
+        max-height: 55px !important; /* Constrain height */
+        height: auto !important;
+        display: block !important;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        border: 1px solid #c0c0c0;
+        object-fit: contain; /* Ensure the whole signature is visible */
+    }
+
+    /* Attachments (Images from visit_images_base64) */
+    #attachments-section .attachment-upload { display: block !important; } /* Should contain the images */
+    
+    /* The JS for printing attachments populates a div, likely with class 'image-previews-container' */
+    #attachments-section .image-previews-container {
+        border: none !important; 
+        padding: 0 !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 4px !important;
+        margin-top: 4px !important;
+    }
+    /* Style for individual attachment image wrappers if present (like .image-preview-item) */
+    #attachments-section .image-preview-item { 
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        display: inline-block; /* Fallback if flex not fully working */
+    }
+    #attachments-section .image-preview-item img { /* Actual attachment images */
+        max-width: 55px !important; /* Reduced size for A4 */
+        max-height: 55px !important;
+        border: 1px solid #b0b0b0 !important;
+        margin: 1px !important; /* Minimal margin */
+        display: inline-block !important;
+        object-fit: cover;
+    }
+    /* Message if no attachments */
+    #attachments-section .image-previews-container + p, /* If the "no images" message is a p after container */
+    #attachments-section p.no-images-message /* Or if it has a specific class */
+    {
+        font-size: 9pt !important;
+        color: #555 !important;
+        text-align: right;
+        padding: 5px 0;
+    }
+
+
+    /* Final Evaluation */
+    #final-evaluation {
+        border: 1px solid #b0b0b0 !important;
+        padding: 8px !important;
+        font-size: 9.5pt !important;
+        color: black !important;
+        margin-top: 12px !important;
+        page-break-inside: avoid !important;
+        text-align: right !important;
+        line-height: 1.4 !important;
+    }
+    #final-evaluation.qualified { background-color: #e0f8e0 !important; border-left: 3px solid #38A169 !important; }
+    #final-evaluation.needs-review { background-color: #fff5e0 !important; border-left: 3px solid #DD6B20 !important; }
+    #final-evaluation.not-qualified { background-color: #ffe0e0 !important; border-left: 3px solid #E53E3E !important; }
+    #final-evaluation:empty { display: none !important; }
+}
+
+    </style>
+</head>
+
+<body>
+
+    <div id="login-overlay" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        ">
+        <div style="
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 90%;
+            ">
+            <h2 style="color: var(--primary-color);">تسجيل الدخول</h2>
+            <input type="text" id="username-input" placeholder="اسم المستخدم" style="margin-bottom: 15px; text-align: center;">
+            <input type="password" id="password-input" placeholder="كلمة المرور" style="margin-bottom: 20px; text-align: center;">
+            <button type="button" id="login-button" style="background-color: var(--primary-color);">دخول</button>
+            <button type="button" id="guest-button" style="background-color: #6B7280; margin-right: 10px;">دخول كزائر</button> <p id="login-message" style="color: red; margin-top: 15px;"></p>
+        </div>
+    </div>
+    <header>
+        <img src="iemg/e-logo1.svg" alt="Logo"> <h1>بيانات مزاولي أعمال الرقية الشرعية<span class="location-highlight"> بمحافظة جدة</span></h1>
+    </header>
+
+    <div class="header-links">
+        <a href="#" id="input-link">واجهة الادخال</a>
+        <a href="#" id="report-link">عرض التقرير</a>
+        <a href="#" id="login-toggle-link">تسجيل الدخول</a> <a href="#" id="logout-link" style="display: none;">تسجيل الخروج</a> </div>
+
+
+    <div class="container">
+        <div class="form-container" id="input-section">
+            <div class="search-container" id="search-container">
+                <label for="search-id">البحث برقم الهوية:</label>
+                <input type="text" id="search-id" name="search-id" pattern="\d{10}" maxlength="10"
+                    title="يجب أن يكون 10 أرقام">
+                <button type="button" id="search-button">بحث</button>
+            </div>
+
+
+            <form id="form">
+                <div id="printable-form-content"> <label for="name">الاسم</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="id">رقم الهوية</label>
+                    <input type="text" id="id" name="id" pattern="\d{10}" maxlength="10" title="يجب أن يكون 10 أرقام"
+                        required>
+
+                    <label for="phone">رقم الجوال</label>
+                    <input type="text" id="phone" name="phone" pattern="\d{10}" maxlength="10"
+                        title="يجب أن يكون 10 أرقام" required>
+
+                    <label for="practitioner_location_coords">موقع المزاول (إحداثيات)</label>
+                    <div class="location-input-group" style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <input type="text" id="practitioner_location_coords" name="practitioner_location_coords"
+                            placeholder="سيتم التعبئة تلقائياً بعد تحديد الموقع أو يمكن التعديل يدوياً"
+                            style="flex-grow: 1; margin-bottom: 0;" required>
+                        <button type="button" id="get-location-button" style="margin-bottom: 0; flex-shrink: 0;">تحديد
+                            موقعي 📍</button>
+                    </div>
+                    <input type="hidden" id="practitioner_location" name="practitioner_location">
+
+
+                    <label for="nationality">الجنسية</label>
+                    <select id="nationality" name="nationality" required>
+                        <option value="">-- اختر --</option>
+                        <option>سعودي</option>
+                        <option>غير سعودي</option>
+                    </select>
+
+                    <label for="status">الحالة الاجتماعية</label>
+                    <select id="status" name="status" required>
+                        <option>أعزب</option>
+                        <option>متزوج</option>
+                    </select>
+
+                    <label for="dob">تاريخ الميلاد</label>
+                    <input type="text" id="dob" name="dob" required>
+                    <label for="education">المؤهل التعليمي</label>
+                    <select id="education" name="education" required>
+                        <option value="">-- اختر --</option>
+                        <option>دكتوراه</option>
+                        <option>ماجستير</option>
+                        <option>بكالوريوس</option>
+                        <option>ثانوي</option>
+                        <option>متوسط</option>
+                        <option>ابتدائي</option>
+                    </select>
+
+                    <label for="gender">الجنس</label>
+                    <select id="gender" name="gender" required>
+                        <option>ذكر</option>
+                        <option>أنثى</option>
+                    </select>
+
+                    <label for="practice_type">نوع المزاولة</label>
+                    <select id="practice_type" name="practice_type" required>
+                        <option value="">-- اختر --</option>
+                        <option>راقي شرعي</option>
+                        <option>معالج شعبي</option>
+                        <option>مفسر أحلام</option>
+                    </select>
+
+                    <label for="profession">المهنة</label>
+                    <select id="profession" name="profession" required>
+                        <option value="">-- اختر --</option>
+                        <option>متسبب</option>
+                        <option>موظف</option>
+                    </select>
+
+                    <label for="previously_prevented">هل سبق أن تم منعه؟</label>
+                    <select id="previously_prevented" name="previously_prevented" required>
+                        <option value="">-- اختر --</option>
+                        <option>نعم</option>
+                        <option>لا</option>
+                    </select>
+
+                    <label for="practice_status">حالة المزاول</label>
+                    <select id="practice_status" name="practice_status" required>
+                        <option value="">-- اختر --</option>
+                        <option>مستمر</option>
+                        <option>منقطع</option>
+                        <option>تم الإيقاف</option>
+                    </select>
+
+                    <label for="visit_type">رقم الزيارة</label>
+                    <select id="visit_type" name="visit_type" required>
+                        <option value="">-- اختر --</option>
+                        <script>
+                            for (let i = 1; i <= 10; i++) {
+                                document.write(`<option>${i}</option>`);
+                            }
+                        </script>
+                    </select>
+
+                    <label for="meeting_date">تاريخ المحضر</label>
+                    <input type="text" id="meeting_date" name="meeting_date" required>
+                    <label for="notes">ملاحظات اللجنة</label>
+                    <textarea id="notes" name="notes"></textarea>
+
+                    <label for="opinion">رأي اللجنة</label>
+                    <textarea id="opinion" name="opinion"></textarea>
+
+                    <div class="criteria-section" id="attachments-section">
+                        <h3>المرفقات (صور الزيارة)</h3>
+                        <div class="attachment-upload"> <button type="button" id="custom-attachment-button" class="custom-file-button">
+                                <span>اختيار الصور</span>
+                            </button>
+                            <input type="file" id="visit_attachments" name="visit_attachments_hidden_because_custom_handled" accept="image/*" multiple style="display: none; width: 0.1px; height: 0.1px; opacity: 0; overflow: hidden; position: absolute; z-index: -1;">
+                            <label id="visit_attachments_warning_label" class="label-warning" style="display: block; margin-top: 8px; margin-bottom: 10px;">(بحد أقصى 5 صور)</label>
+                            
+                            <div id="image-previews" class="image-previews-container" style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px; border: 1px dashed #ccc; padding: 10px; border-radius: 6px;">
+                                </div>
+                            <small id="image-count-message" style="display: block; text-align: left; margin-top: 5px; font-weight: bold;"></small>
+                        </div>
+                    </div>
+
+
+                    <div class="criteria-section">
+                        <h3>معايير التقييم</h3>
+
+                        <div class="criterion" data-criterion-type="positive"> <span class="criterion-label">حفظ القرآن
+                                الكريم، متوفر فيه الصلاح، الإتقان لأحكام الرقية وعلى قدر من العلم بالشريعة</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria1" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria1" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="positive">
+                            <span class="criterion-label">وجود كشف طبي يضمن سلامة الراقي أو المعالج من الأمراض المعدية
+                                (صلاحيته ستة أشهر)</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria2" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria2" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="negative"> <span class="criterion-label">استخدام أي
+                                أسلوب من أساليب التعذيب كالضرب أو الخنق أو الصعق الكهربائي أو خلافه</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria3" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria3" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="neutral-positive"> <span class="criterion-label">استخدام
+                                الوافدين مع المزاول</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria4" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria4" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="negative">
+                            <span class="criterion-label">القراءة الجماعية أو مكبرات الصوت</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria5" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria5" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="positive"> <span class="criterion-label">القراءة على
+                                النساء بوجود محرم</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria6" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria6" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="negative">
+                            <span class="criterion-label">استخدام القنوات الفضائية أو الشبكات العنكبوتية ومواقع التواصل
+                                الاجتماعي للإعلان أو للتسويق</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria7" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria7" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="negative">
+                            <span class="criterion-label">وجود مسميات للمزاول مثل الروحاني أو المعالج أو خلاف ذلك</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria8" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria8" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="neutral-positive"> <span
+                                class="criterion-label">الاشتراط بمبالغ مالية</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria9" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria9" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="negative">
+                            <span class="criterion-label">بيع الماء أو الأعشاب أو الزيوت أو العسل أو الخلطات مجهولة
+                                المصدر</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria10" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria10" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="negative">
+                            <span class="criterion-label">وضع لوحة إعلانية لمقر المزاول</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria11" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria11" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="positive">
+                            <span class="criterion-label">توفر وسائل السلامة في موقع مقر المزاول</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria12" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria12" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="neutral-positive"> <span class="criterion-label">التنقل
+                                بين المنازل للرقية الشرعية أو الطب الشعبي</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria13" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria13" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="negative">
+                            <span class="criterion-label">وجود أذى من المزاول لجيرانه مثل ازدحام السيارات أمام المقر أو خلاف
+                                ذلك</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria14" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria14" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                        <div class="criterion" data-criterion-type="positive">
+                            <span class="criterion-label">الالتزام بالإجراءات الاحترازية والتباعد الاجتماعي</span>
+                            <div class="options">
+                                <label class="yes"><input type="radio" name="criteria15" value="نعم" class="yes-radio" required> نعم</label>
+                                <label class="no"><input type="radio" name="criteria15" value="لا" class="no-radio" required> لا</label>
+                            </div>
+                            <div class="warning-message hidden">
+                                ⚠️ هذا مخالف لضوابط اللجنة. </div>
+                        </div>
+
+                    </div>
+
+                    <div id="final-evaluation"></div>
+
+                    <div class="members-section">
+                        <h3>أسماء أعضاء اللجنة المشاركين في الزيارة وتوقيعاتهم</h3>
+
+                        <div class="member-input">
+                             <img src="iemg/وزارة الشؤون الاسلامية.svg" alt="شعار وزارة الشؤون الإسلامية" class="member-logo">
+                            <div class="member-details">
+                                <label for="member_islamic_affairs">مندوب فرع وزارة الشؤون الإسلامية والدعوة والإرشاد بمحافظة
+                                    جدة:</label>
+                                <input type="text" id="member_islamic_affairs" name="member_islamic_affairs">
+                                <label for="signature_canvas_member1">🖋️ التوقيع:</label>
+                                <canvas id="signature_canvas_member1" class="signature-pad"></canvas>
+                                <button type="button" class="clear-signature"
+                                    data-canvas-id="signature_canvas_member1">مسح</button>
+                                <input type="hidden" id="signature_member1" name="signature_member1">
+                                <img id="signature_image_member1" class="signature-image" style="display:none;" alt="توقيع مندوب الشؤون الإسلامية"/>
+
+
+                                <label for="date_member1">🗓️ التاريخ:</label>
+                                <input type="text" id="date_member1" name="date_member1">
+                                </div>
+                        </div>
+
+                        <div class="member-input">
+                            <img src="iemg/شعار هيئة الأمر بالمعروف.svg" alt="شعار هيئة الامر بالمعروف"
+                                class="member-logo">
+                            <div class="member-details">
+                                <label for="member_haia">مندوب فرع هيئة الامر بالمعروف والنهي عن المنكر بمحافظة
+                                    جدة:</label>
+                                <input type="text" id="member_haia" name="member_haia">
+
+                                <label for="signature_canvas_member2">🖋️ التوقيع:</label>
+                                <canvas id="signature_canvas_member2" class="signature-pad"></canvas>
+                                <button type="button" class="clear-signature"
+                                    data-canvas-id="signature_canvas_member2">مسح</button>
+                                <input type="hidden" id="signature_member2" name="signature_member2">
+                                <img id="signature_image_member2" class="signature-image" style="display:none;" alt="توقيع مندوب الهيئة"/>
+
+
+                                <label for="date_member2">🗓️ التاريخ:</label>
+                                <input type="text" id="date_member2" name="date_member2">
+                                </div>
+                        </div>
+
+                        <div class="member-input">
+                            <img src="iemg/الشرطة.svg" alt="شعار البحث الجنائي" class="member-logo">
+                            <div class="member-details">
+                                <label for="member_criminal_investigation">مندوب فرع البحث الجنائي بمحافظة جدة:</label>
+                                <input type="text" id="member_criminal_investigation"
+                                    name="member_criminal_investigation">
+
+                                <label for="signature_canvas_member3">🖋️ التوقيع:</label>
+                                <canvas id="signature_canvas_member3" class="signature-pad"></canvas>
+                                <button type="button" class="clear-signature"
+                                    data-canvas-id="signature_canvas_member3">مسح</button>
+                                <input type="hidden" id="signature_member3" name="signature_member3">
+                                <img id="signature_image_member3" class="signature-image" style="display:none;" alt="توقيع مندوب البحث الجنائي"/>
+
+
+                                <label for="date_member3">🗓️ التاريخ:</label>
+                                <input type="text" id="date_member3" name="date_member3">
+                                </div>
+                        </div>
+
+                        <div class="member-input">
+                            <img src="iemg/Makkah Region.svg" alt="شعار اللجنة الميدانية" class="member-logo">
+                            <div class="member-details">
+                                <label for="member_committee_head">مندوب رئيس اللجنة الميدانية بمحافظة جدة:</label>
+                                <input type="text" id="member_committee_head" name="member_committee_head">
+
+                                <label for="signature_canvas_member4">🖋️ التوقيع:</label>
+                                <canvas id="signature_canvas_member4" class="signature-pad"></canvas>
+                                <button type="button" class="clear-signature"
+                                    data-canvas-id="signature_canvas_member4">مسح</button>
+                                <input type="hidden" id="signature_member4" name="signature_member4">
+                                <img id="signature_image_member4" class="signature-image" style="display:none;" alt="توقيع رئيس اللجنة"/>
+
+                                <label for="date_member4">🗓️ التاريخ:</label>
+                                <input type="text" id="date_member4" name="date_member4">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;"> <button type="submit">إرسال</button>
+                    <button type="button" id="update-button">تعديل البيانات</button>
+                    <button type="button" id="print-pdf-button">طباعة PDF</button>
+                </div>
+
+                <div id="msg" class="success"></div>
+            </form>
+        </div>
+
+        <div class="report-section-container"> <h2 class="report-title hidden" id="report-title">التقرير</h2>
+            <div class="report-container powerbi-container hidden" id="report-section">
+                <iframe
+                    src="https://app.powerbi.com/view?r=eyJrIjoiY2M3M2RiY2EtNGU2Yy00YzNhLTgxNGUtNzhhMmE3ZjYzYjE4IiwidCI6IjJkMzE5NGUzLTE2NTQtNDZiZC1iYWUyLWFkMzdiYTExYjBhZSIsImMiOjl9&embedImagePlaceholder=true"
+                    frameborder="0" allowFullScreen="true"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>"جميع الحقوق محفوظة © عاصم المالكي 2025"</p>
+    </footer>
+
+    <button id="scroll-to-top" class="hidden">⬆</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/ar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr-hijri/dist/flatpickr-hijri.min.js"></script>
+
+
+    <script>
+        function convertArabicNumeralsToEnglish(str) {
+            if (typeof str !== 'string') return str;
+            const arabicNumerals = /[٠١٢٣٤٥٦٧٨٩]/g;
+            return str.replace(arabicNumerals, d => d.charCodeAt(0) - 1632);
+        }
+
+       document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM Content Loaded with New Design.");
+
+    const inputLink = document.getElementById('input-link');
+    const reportLink = document.getElementById('report-link');
+    const inputSection = document.getElementById('input-section');
+    const reportSection = document.getElementById('report-section');
+    const reportTitle = document.getElementById('report-title');
+    const container = document.querySelector('.container');
+    const form = document.getElementById('form');
+    const finalEvaluationDiv = document.getElementById('final-evaluation');
+    const printPdfButton = document.getElementById('print-pdf-button');
+    const getLocationButton = document.getElementById('get-location-button');
+    const practitionerLocationCoordsInput = document.getElementById('practitioner_location_coords');
+    const practitionerLocationInput = document.getElementById('practitioner_location');
+    const msgDiv = document.getElementById('msg');
+    const scrollToTopButton = document.getElementById('scroll-to-top');
+
+    const signaturePads = {};
+
+    const phoneInput = document.getElementById('phone');
+    const idInput = document.getElementById('id');
+    const searchIdInput = document.getElementById('search-id');
+    
+    const visitAttachmentsInput = document.getElementById('visit_attachments');
+    const imagePreviewsContainer = document.getElementById('image-previews');
+    const customAttachmentButton = document.getElementById('custom-attachment-button');
+    const imageCountMessage = document.getElementById('image-count-message');
+    let compressedImagesData = []; 
+    const MAX_IMAGES = 5;
+
+    // --- MODIFICATION: Function to generate PDF (either save or return data) ---
+    async function generateAndOutputPdf(outputOptions = { outputType: 'save' }) {
+        const elementToPrint = document.getElementById('printable-form-content');
+        if (!elementToPrint) {
+            throw new Error("محتوى الطباعة #printable-form-content غير موجود.");
+        }
+
+        const currentIdField = document.getElementById('id');
+        const currentNameField = document.getElementById('name');
+        const practitionerId = currentIdField ? (currentIdField.value || "بيانات") : "بيانات";
+        const practitionerName = currentNameField ? (currentNameField.value || "مزاول") : "مزاول";
+        const pdfFileName = `محضر_${practitionerName.replace(/\s+/g, '_')}_${practitionerId}.pdf`;
+
+        const opt = {
+            margin: [15, 10, 15, 10], // top, left, bottom, right in mm
+            filename: pdfFileName,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: {
+                scale: 2,
+                logging: false, // Changed to false for production
+                dpi: 192,
+                letterRendering: true,
+                useCORS: true,
+                scrollY: -window.scrollY, // Capture from top
+                windowWidth: elementToPrint.scrollWidth,
+                windowHeight: elementToPrint.scrollHeight
+            },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+        };
+
+        // Prepare signatures for printing (show images, hide canvas)
+        for (let i = 1; i <= 4; i++) {
+            const canvas = document.getElementById(`signature_canvas_member${i}`);
+            const imgElement = document.getElementById(`signature_image_member${i}`);
+            if (canvas && imgElement && signaturePads[`member${i}`]) {
+                const dataUrl = signaturePads[`member${i}`].canvas.getDataURL();
+                if (dataUrl) {
+                    imgElement.src = dataUrl;
+                    imgElement.style.display = 'block';
+                } else {
+                    imgElement.style.display = 'none';
+                }
+            }
+        }
+
+        const printableAttachmentsSection = elementToPrint.querySelector("#attachments-section");
+        let originalAttachmentUploadHTML = null; // Store the original HTML of the upload div
+
+        if (printableAttachmentsSection) {
+            const attachmentUploadDiv = printableAttachmentsSection.querySelector(".attachment-upload");
+            if (attachmentUploadDiv) {
+                originalAttachmentUploadHTML = attachmentUploadDiv.innerHTML; // Save current state
+                attachmentUploadDiv.innerHTML = ''; // Clear for PDF generation
+
+                if (compressedImagesData.length > 0) {
+                    const tempPreviews = document.createElement('div');
+                    tempPreviews.className = 'image-previews-container'; // Use existing class for styling
+                    tempPreviews.style.border = 'none'; 
+                    tempPreviews.style.padding = '0';
+                    compressedImagesData.forEach(imgData => {
+                        const imgItemDiv = document.createElement('div');
+                        imgItemDiv.className = 'image-preview-item'; // Use existing class
+                        imgItemDiv.style.boxShadow = 'none'; 
+                        imgItemDiv.style.padding = '2px';
+
+                        const imgEl = document.createElement('img');
+                        imgEl.src = imgData.data;
+                        // Apply styles similar to @media print for consistency
+                        imgEl.style.maxWidth = '60px';
+                        imgEl.style.maxHeight = '60px';
+                        imgEl.style.border = '1px solid #ccc';
+                        imgEl.style.margin = '2px';
+                        imgEl.style.display = 'inline-block';
+                        imgEl.style.objectFit = 'cover';
+                        imgItemDiv.appendChild(imgEl);
+                        tempPreviews.appendChild(imgItemDiv);
+                    });
+                    attachmentUploadDiv.appendChild(tempPreviews);
+                } else {
+                    const noImagesMsg = document.createElement('p');
+                    noImagesMsg.textContent = "لم يتم إرفاق صور للزيارة.";
+                    noImagesMsg.style.fontSize = "10pt"; // Match print style
+                    attachmentUploadDiv.appendChild(noImagesMsg);
+                }
+            }
+        }
+        
+        try {
+            const pdfWorker = html2pdf().from(elementToPrint).set(opt);
+            let result;
+            switch (outputOptions.outputType) {
+                case 'blob':
+                    result = await pdfWorker.outputPdf('blob');
+                    break;
+                case 'dataurlstring':
+                    result = await pdfWorker.outputPdf('dataurlstring');
+                    break;
+                case 'save':
+                default:
+                    await pdfWorker.save();
+                    result = { success: true, fileName: pdfFileName }; // Indicate success and pass filename
+                    break;
+            }
+            return result;
+        } catch (error) {
+            console.error("خطأ في دالة generateAndOutputPdf:", error);
+            throw error; // Re-throw to be caught by the caller
+        } finally {
+            // Restore signatures (hide images) - canvas visibility handled by print CSS
+            for (let i = 1; i <= 4; i++) {
+                 const imgElement = document.getElementById(`signature_image_member${i}`);
+                 if(imgElement) imgElement.style.display = 'none';
+            }
+            // Restore the original content of the attachment upload div
+            if (printableAttachmentsSection && originalAttachmentUploadHTML !== null) {
+                const attachmentUploadDiv = printableAttachmentsSection.querySelector(".attachment-upload");
+                if (attachmentUploadDiv) {
+                    attachmentUploadDiv.innerHTML = originalAttachmentUploadHTML;
+                    // Re-attach event listeners if they were part of the innerHTML and got removed
+                    // For this specific case, the button is outside, and preview is dynamically built,
+                    // so direct restoration of innerHTML is complex.
+                    // A better way for dynamic content is to hide/show, or rebuild.
+                    // For now, we will re-run displayImagePreviews if it was cleared for PDF.
+                    // This is simpler: just ensure the interactive elements are hidden by print CSS and the above DOM manipulation for PDF content is sufficient.
+                    // The original code just set innerHTML = originalAttachmentContent;
+                    // The primary concern is the print output. The screen view will be restored by subsequent actions or page refresh.
+                    // The button `custom-attachment-button` itself is not part of `originalAttachmentUploadHTML`'s scope if it was taken from `.attachment-upload`
+                }
+            }
+            // If the above restoration isn't perfect, ensure `displayImagePreviews()` is called to refresh the interactive view
+            // if you return to the form view without reloading. For now, print CSS handles hiding.
+        }
+    }
+
+
+    function applyNumeralConversion(event) {
+        const originalValue = event.target.value;
+        const convertedValue = convertArabicNumeralsToEnglish(originalValue);
+        if (originalValue !== convertedValue) {
+            const start = event.target.selectionStart;
+            const end = event.target.selectionEnd;
+            event.target.value = convertedValue;
+            event.target.setSelectionRange(start, end);
+        }
+    }
+
+    if (phoneInput) phoneInput.addEventListener('input', applyNumeralConversion);
+    if (idInput) idInput.addEventListener('input', applyNumeralConversion);
+    if (searchIdInput) searchIdInput.addEventListener('input', applyNumeralConversion);
+    if (practitionerLocationCoordsInput) practitionerLocationCoordsInput.addEventListener('input', applyNumeralConversion);
+
+    if (customAttachmentButton && visitAttachmentsInput) {
+        customAttachmentButton.addEventListener('click', () => {
+            if (compressedImagesData.length >= MAX_IMAGES) {
+                msgDiv.textContent = `لا يمكن إضافة المزيد من الصور. الحد الأقصى هو ${MAX_IMAGES} صور.`;
+                msgDiv.style.color = 'var(--warning-color)';
+                setTimeout(() => { msgDiv.textContent = ''; msgDiv.style.color = 'var(--secondary-color)'; }, 3000);
+                return;
+            }
+            visitAttachmentsInput.click();
+        });
+    }
+    
+    if (visitAttachmentsInput) {
+        visitAttachmentsInput.addEventListener('change', handleImageUpload);
+    }
+
+    function displayImagePreviews() {
+        imagePreviewsContainer.innerHTML = '';
+        compressedImagesData.forEach(imgData => {
+            const previewItem = document.createElement('div');
+            previewItem.classList.add('image-preview-item');
+            previewItem.setAttribute('data-image-id', imgData.id);
+
+            const previewImg = document.createElement('img');
+            previewImg.src = imgData.data;
+            previewImg.title = `${imgData.name} (مضغوطة)`;
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.classList.add('delete-image-btn');
+            deleteBtn.textContent = 'حذف';
+            deleteBtn.title = 'حذف الصورة';
+            deleteBtn.type = 'button';
+
+            deleteBtn.addEventListener('click', function() {
+                const imageIdToDelete = this.parentElement.getAttribute('data-image-id');
+                compressedImagesData = compressedImagesData.filter(img => img.id.toString() !== imageIdToDelete);
+                displayImagePreviews();
+                visitAttachmentsInput.value = null; 
+            });
+
+            previewItem.appendChild(previewImg);
+            previewItem.appendChild(deleteBtn);
+            imagePreviewsContainer.appendChild(previewItem);
+        });
+        updateImageCountMessage();
+        if (imagePreviewsContainer.childNodes.length === 0 && imagePreviewsContainer.dataset.wasEmpty !== 'true') {
+             imagePreviewsContainer.innerHTML = ''; 
+        }
+        imagePreviewsContainer.dataset.wasEmpty = (imagePreviewsContainer.childNodes.length === 0).toString();
+
+    }
+    
+    function updateImageCountMessage() {
+        const count = compressedImagesData.length;
+        if (imageCountMessage){ 
+            if (count > 0) {
+                imageCountMessage.textContent = `العدد: ${count} / ${MAX_IMAGES}`;
+            } else {
+                imageCountMessage.textContent = '';
+            }
+        }
+        if (customAttachmentButton) {
+             const isAdmin = (localStorage.getItem('userRole') || 'guest') === 'admin';
+             customAttachmentButton.disabled = !isAdmin || count >= MAX_IMAGES;
+        }
+    }
+
+    function handleImageUpload(event) {
+        const files = event.target.files;
+        let filesToProcess = Array.from(files);
+
+        if (filesToProcess.length === 0) {
+            visitAttachmentsInput.value = null; 
+            return;
+        }
+
+        const availableSlots = MAX_IMAGES - compressedImagesData.length;
+
+        if (availableSlots <= 0) {
+            msgDiv.textContent = `لقد وصلت للحد الأقصى للصور (${MAX_IMAGES}). يرجى حذف بعض الصور لإضافة المزيد.`;
+            msgDiv.style.color = 'var(--warning-color)';
+            setTimeout(() => { msgDiv.textContent = ''; msgDiv.style.color = 'var(--secondary-color)'; }, 3000);
+            visitAttachmentsInput.value = null;
+            return;
+        }
+        
+        if (filesToProcess.length > availableSlots) {
+            msgDiv.textContent = `تم اختيار ${filesToProcess.length} صور. سيتم إضافة أول ${availableSlots} صور فقط للوصول للحد الأقصى (${MAX_IMAGES}).`;
+            msgDiv.style.color = 'var(--warning-color)';
+            filesToProcess = filesToProcess.slice(0, availableSlots);
+            setTimeout(() => { msgDiv.textContent = ''; msgDiv.style.color = 'var(--secondary-color)'; }, 4000);
+        }
+        
+        let processedFileCount = 0; 
+        let successfullyAddedCount = 0; 
+
+        filesToProcess.forEach(file => {
+            if (!file.type.startsWith('image/')) {
+                processedFileCount++;
+                 if (processedFileCount === filesToProcess.length && successfullyAddedCount === 0 && compressedImagesData.length === 0) {
+                     displayImagePreviews(); 
+                 }
+                return; 
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    if (compressedImagesData.length < MAX_IMAGES) { 
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        const MAX_DIMENSION = 800; 
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height) {
+                            if (width > MAX_DIMENSION) {
+                                height *= MAX_DIMENSION / width;
+                                width = MAX_DIMENSION;
+                            }
+                        } else {
+                            if (height > MAX_DIMENSION) {
+                                width *= MAX_DIMENSION / height;
+                                height = MAX_DIMENSION;
+                            }
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(img, 0, 0, width, height);
+                        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                        
+                        const uniqueId = Date.now().toString() + Math.random().toString().slice(2);
+
+                        compressedImagesData.push({
+                            id: uniqueId,
+                            name: file.name,
+                            type: 'image/jpeg',
+                            data: compressedBase64
+                        });
+                        successfullyAddedCount++;
+                    }
+                    
+                    processedFileCount++;
+                    if (processedFileCount === filesToProcess.length) {
+                        displayImagePreviews();
+                    }
+                }
+                img.onerror = function() {
+                    console.error("خطأ في تحميل الصورة:", file.name);
+                    processedFileCount++;
+                    if (processedFileCount === filesToProcess.length) {
+                        displayImagePreviews();
+                    }
+                }
+                img.src = e.target.result;
+            }
+            reader.onerror = function() {
+                console.error("خطأ في قراءة الملف:", file.name);
+                processedFileCount++;
+                if (processedFileCount === filesToProcess.length) {
+                    displayImagePreviews();
+                }
+            }
+            reader.readAsDataURL(file);
+        });
+        visitAttachmentsInput.value = null; 
+    }
+
+
+    function resizeAllSignaturePads() {
+        for (const key in signaturePads) {
+            if (signaturePads[key] && signaturePads[key].resizeCanvas) {
+                signaturePads[key].resizeCanvas();
+            }
+        }
+    }
+    
+    function initSignaturePad(canvasId, hiddenInputId) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) { console.error(`Canvas ${canvasId} not found.`); return null; }
+        const ctx = canvas.getContext('2d');
+        if (!ctx) { console.error(`2D context ${canvasId} not available.`); return null; }
+        const hiddenInput = document.getElementById(hiddenInputId);
+        let isDrawing = false, lastX = 0, lastY = 0;
+
+        function resizeCanvas() {
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            let imgData = null;
+            if(canvas.width > 0 && canvas.height > 0) try { imgData = ctx.getImageData(0,0,canvas.width,canvas.height); } catch(e){}
+            canvas.width = rect.width * dpr; canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            if(imgData) try { ctx.putImageData(imgData,0,0); } catch(e){}
+            ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--signature-stroke-color').trim() || '#1E3A8A'; // Use CSS variable
+            ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        }
+        if (canvas.offsetParent !== null) resizeCanvas(); else {
+            const observer = new MutationObserver(() => {
+                if (canvas.offsetParent !== null) {
+                    resizeCanvas();
+                    observer.disconnect();
+                }
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+        }
+
+
+        const startDraw = (e) => {
+            if (canvas.getAttribute('disabled') === 'true') return;
+            isDrawing = true;
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            [lastX, lastY] = [clientX - rect.left, clientY - rect.top];
+        };
+        const draw = (e) => {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            if(!clientX || !clientY) return;
+            const x = clientX - rect.left, y = clientY - rect.top;
+            ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(x,y); ctx.stroke();
+            [lastX, lastY] = [x,y];
+        };
+        const endDraw = () => {
+            isDrawing = false;
+            if(hiddenInput) hiddenInput.value = canvas.getDataURL();
+        };
+        
+        canvas.addEventListener('mousedown', startDraw);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', endDraw);
+        canvas.addEventListener('mouseout', () => { if(isDrawing) endDraw(); });
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startDraw(e.touches[0]); }, { passive: false });
+        canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e.touches[0]); }, { passive: false });
+        canvas.addEventListener('touchend', endDraw);
+        canvas.addEventListener('touchcancel', () => isDrawing = false);
+
+        function clearCanvas() { ctx.clearRect(0, 0, canvas.width / (window.devicePixelRatio||1), canvas.height / (window.devicePixelRatio||1)); if (hiddenInput) hiddenInput.value = ''; }
+        const clearButton = document.querySelector(`button[data-canvas-id="${canvasId}"]`);
+        if (clearButton) clearButton.addEventListener('click', clearCanvas);
+
+        canvas.getDataURL = function() { // Check if canvas is empty before returning DataURL
+            if (this.width === 0 || this.height === 0) return '';
+            const c = this.getContext('2d'); 
+            // Create a temporary canvas to check if it's truly blank, accounting for potential anti-aliasing pixels
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = this.width;
+            tempCanvas.height = this.height;
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCtx.drawImage(this, 0, 0);
+
+            const imgD = tempCtx.getImageData(0,0,tempCanvas.width, tempCanvas.height);
+            let empty = true; 
+            for(let i=3; i<imgD.data.length; i+=4) { // Check alpha channel
+                 if(imgD.data[i] !== 0) {empty=false; break;}
+            }
+            return empty ? '' : this.toDataURL('image/png');
+        };
+        canvas.fromDataURL = function(dataURL) {
+            if (!dataURL) { clearCanvas(); return; }
+            const img = new Image(); const dpr = window.devicePixelRatio || 1;
+            img.onload = () => { const cCtx = this.getContext('2d'); cCtx.clearRect(0,0,this.width,this.height); cCtx.drawImage(img,0,0, this.width/dpr, this.height/dpr); };
+            img.src = dataURL;
+        };
+        return { canvas, clearCanvas, fromDataURL: canvas.fromDataURL, resizeCanvas };
+    }
+
+    signaturePads.member1 = initSignaturePad('signature_canvas_member1', 'signature_member1');
+    signaturePads.member2 = initSignaturePad('signature_canvas_member2', 'signature_member2');
+    signaturePads.member3 = initSignaturePad('signature_canvas_member3', 'signature_member3');
+    signaturePads.member4 = initSignaturePad('signature_canvas_member4', 'signature_member4');
+
+    const loginOverlay = document.getElementById('login-overlay');
+    const usernameInput = document.getElementById('username-input');
+    const passwordInput = document.getElementById('password-input');
+    const loginButton = document.getElementById('login-button');
+    const guestButton = document.getElementById('guest-button');
+    const loginMessage = document.getElementById('login-message');
+    const loginToggleLink = document.getElementById('login-toggle-link');
+    const logoutLink = document.getElementById('logout-link');
+
+    let currentUserRole = localStorage.getItem('userRole') || 'guest';
+
+    function updateUIForRole(role) {
+        const isGuest = role === 'guest';
+        const isAdmin = role === 'admin';
+        loginOverlay.style.display = 'none';
+        inputLink.style.display = 'inline-flex'; 
+        reportLink.style.display = 'inline-flex';
+        loginToggleLink.style.display = isGuest ? 'inline-flex' : 'none';
+        logoutLink.style.display = isAdmin ? 'inline-flex' : 'none';
+        document.getElementById('search-container').style.display = 'flex';
+
+        form.querySelectorAll('input:not(#search-id):not(#visit_attachments), select, textarea, .clear-signature, #get-location-button').forEach(el => {
+            el.disabled = !isAdmin;
+        });
+        
+        if (customAttachmentButton) customAttachmentButton.disabled = !isAdmin || (compressedImagesData.length >= MAX_IMAGES && isAdmin);
+
+        Object.values(signaturePads).forEach(pad => {
+            if (pad && pad.canvas) {
+                pad.canvas.style.cursor = isAdmin ? 'crosshair' : 'not-allowed';
+                if(isAdmin) pad.canvas.removeAttribute('disabled'); else pad.canvas.setAttribute('disabled','true');
+            }
+        });
+        form.querySelector('button[type="submit"]').style.display = isAdmin ? 'inline-flex' : 'none';
+        document.getElementById('update-button').style.display = isAdmin ? 'inline-flex' : 'none';
+        document.getElementById('print-pdf-button').style.display = 'inline-flex'; // Always visible for both roles
+        document.getElementById('search-button').removeAttribute('disabled');
+
+        if (isAdmin) {
+            if (inputSection.classList.contains('hidden') && reportSection.classList.contains('hidden')) {
+                inputSection.classList.remove('hidden');
+                reportSection.classList.add('hidden');
+                reportTitle.classList.add('hidden');
+                container.style.gridTemplateColumns = '1fr'; 
+                inputLink.classList.add('active'); reportLink.classList.remove('active');
+                setTimeout(resizeAllSignaturePads, 50); 
+            } else if (!inputSection.classList.contains('hidden')) {
+                 setTimeout(resizeAllSignaturePads, 50); 
+            }
+        } else { 
+             if (inputSection.classList.contains('hidden') && reportSection.classList.contains('hidden')) {
+                inputSection.classList.remove('hidden');
+                reportSection.classList.add('hidden');
+                reportTitle.classList.add('hidden');
+                container.style.gridTemplateColumns = '1fr';
+                inputLink.classList.add('active'); reportLink.classList.remove('active');
+             } else if (reportSection.classList.contains('hidden')) { 
+                inputSection.classList.remove('hidden');
+                reportSection.classList.add('hidden');
+                reportTitle.classList.add('hidden');
+                container.style.gridTemplateColumns = '1fr';
+                inputLink.classList.add('active'); reportLink.classList.remove('active');
+             }
+        }
+        updateImageCountMessage(); 
+    }
+
+    loginButton.addEventListener('click', function() {
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+        if (username === 'asim' && password === '7878') {
+            localStorage.setItem('userRole', 'admin');
+            currentUserRole = 'admin';
+            updateUIForRole('admin');
+            loginMessage.textContent = ''; 
+            msgDiv.textContent = 'تم تسجيل الدخول بنجاح كمسؤول.';
+            msgDiv.style.color = 'var(--yes-color)'; 
+            msgDiv.style.backgroundColor = 'var(--light-primary-color)';
+            inputSection.classList.remove('hidden');
+            reportSection.classList.add('hidden');
+            reportTitle.classList.add('hidden');
+            container.style.gridTemplateColumns = '1fr';
+            inputLink.classList.add('active'); reportLink.classList.remove('active');
+            setTimeout(resizeAllSignaturePads, 50);
+        } else {
+            loginMessage.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة.';
+            msgDiv.textContent = ''; 
+        }
+    });
+
+    guestButton.addEventListener('click', function() {
+        localStorage.setItem('userRole', 'guest');
+        currentUserRole = 'guest';
+        updateUIForRole('guest');
+        loginMessage.textContent = ''; 
+        msgDiv.textContent = 'تم الدخول كزائر. يمكنك البحث وعرض البيانات.';
+        msgDiv.style.color = 'var(--primary-color)';
+        msgDiv.style.backgroundColor = 'var(--light-primary-color)';
+        inputSection.classList.remove('hidden');
+        reportSection.classList.add('hidden');
+        reportTitle.classList.add('hidden');
+        container.style.gridTemplateColumns = '1fr';
+        inputLink.classList.add('active'); reportLink.classList.remove('active');
+    });
+
+    loginToggleLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        loginOverlay.style.display = 'flex';
+        loginMessage.textContent = '';
+        usernameInput.value = '';
+        passwordInput.value = '';
+        usernameInput.focus();
+    });
+
+    logoutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('userRole');
+        currentUserRole = 'guest';
+        clearFormAndSignatures(); 
+        updateUIForRole('guest'); 
+        loginOverlay.style.display = 'flex'; 
+        msgDiv.textContent = 'تم تسجيل الخروج بنجاح.';
+        msgDiv.style.color = 'var(--yes-color)';
+        msgDiv.style.backgroundColor = 'var(--light-primary-color)';
+    });
+    
+    if (!localStorage.getItem('userRole')) {
+        loginOverlay.style.display = 'flex'; 
+    } else {
+        updateUIForRole(currentUserRole);
+    }
+
+    inputLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        inputSection.classList.remove('hidden');
+        reportSection.classList.add('hidden');
+        reportTitle.classList.add('hidden');
+        container.style.gridTemplateColumns = '1fr';
+        inputLink.classList.add('active'); reportLink.classList.remove('active');
+        if (currentUserRole === 'admin' && !inputSection.classList.contains('hidden')) { 
+            setTimeout(resizeAllSignaturePads, 50);
+        }
+    });
+
+    reportLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        inputSection.classList.add('hidden');
+        reportSection.classList.remove('hidden');
+        reportTitle.classList.remove('hidden');
+        container.style.gridTemplateColumns = '1fr'; 
+        reportLink.classList.add('active'); inputLink.classList.remove('active');
+    });
+    
+    function clearFormAndSignatures() {
+        form.reset();
+        for (const key in signaturePads) {
+            if (signaturePads[key] && signaturePads[key].clearCanvas) { 
+                signaturePads[key].clearCanvas();
+            }
+        }
+        if (typeof updateEvaluationAndWarnings === "function") {
+             updateEvaluationAndWarnings(); 
+        }
+        msgDiv.textContent = ''; 
+        msgDiv.style.backgroundColor = '';
+        const idField = document.getElementById('id');
+        if (idField) { 
+            idField.removeAttribute('readonly'); 
+        }
+        if (visitAttachmentsInput) visitAttachmentsInput.value = null; 
+        compressedImagesData = []; 
+        displayImagePreviews(); 
+        if (searchIdInput) searchIdInput.value = ''; 
+    }
+    
+    function updateEvaluationAndWarnings() {
+        let negativeConditionsMet = false;
+        const criteriaElements = form.querySelectorAll('.criterion');
+        const totalCriteria = criteriaElements.length;
+        let checkedCriteriaCount = 0;
+        criteriaElements.forEach(criterion => {
+            const selectedOption = criterion.querySelector('input[type="radio"]:checked');
+            const warningMessage = criterion.querySelector('.warning-message');
+            if (warningMessage) warningMessage.classList.add('hidden');
+            if (selectedOption) {
+                checkedCriteriaCount++;
+                const value = selectedOption.value;
+                const criterionType = criterion.getAttribute('data-criterion-type'); 
+                if ( (criterionType === 'positive' && value === 'لا') || 
+                     (criterionType === 'negative' && value === 'نعم') ) {
+                    negativeConditionsMet = true;
+                    if (warningMessage) warningMessage.classList.remove('hidden');
+                }
+            }
+        });
+        let evaluationText = '', evaluationClass = '';
+        if (negativeConditionsMet) {
+            evaluationText = '❌ غير مؤهل لوجود مخالفات.'; evaluationClass = 'not-qualified';
+        } else if (checkedCriteriaCount === totalCriteria && totalCriteria > 0) {
+            evaluationText = '✅ مؤهل.'; evaluationClass = 'qualified';
+        } else if (totalCriteria > 0 && checkedCriteriaCount < totalCriteria && checkedCriteriaCount > 0) { 
+            evaluationText = '⚠️ الرجاء إكمال جميع معايير التقييم.'; evaluationClass = 'needs-review';
+        } else if (totalCriteria > 0 && checkedCriteriaCount === 0) { 
+             evaluationText = 'الرجاء تقييم المعايير.'; evaluationClass = ''; 
+        }
+        finalEvaluationDiv.textContent = evaluationText;
+        finalEvaluationDiv.className = 'final-evaluation'; 
+        if(evaluationClass) finalEvaluationDiv.classList.add(evaluationClass);
+        if(evaluationText === 'الرجاء تقييم المعايير.') finalEvaluationDiv.style.backgroundColor = 'var(--background-color)'; else finalEvaluationDiv.style.backgroundColor = '';
+    }
+    form.querySelectorAll('.criterion input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', updateEvaluationAndWarnings);
+    });
+    updateEvaluationAndWarnings(); 
+
+    if (getLocationButton) {
+        getLocationButton.addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude, lon = position.coords.longitude;
+                    practitionerLocationCoordsInput.value = `${lat.toFixed(6)}, ${lon.toFixed(6)}`; 
+                    practitionerLocationInput.value = `${lat.toFixed(6)}, ${lon.toFixed(6)}`; 
+                    msgDiv.textContent = 'تم تحديد الموقع بنجاح!';
+                    msgDiv.style.color = 'var(--yes-color)';
+                    msgDiv.style.backgroundColor = 'var(--light-primary-color)';
+                }, function(error) {
+                    msgDiv.textContent = `خطأ في تحديد الموقع: ${error.message}`;
+                    msgDiv.style.color = 'var(--no-color)';
+                    msgDiv.style.backgroundColor = 'var(--light-secondary-color)'; 
+                });
+            } else {
+                msgDiv.textContent = "المتصفح لا يدعم تحديد المواقع.";
+                msgDiv.style.color = 'var(--warning-color)';
+                 msgDiv.style.backgroundColor = 'var(--light-secondary-color)';
+            }
+        });
+    }
+    
+    const searchButton = document.getElementById('search-button');
+    searchButton.addEventListener('click', function() {
+    const practitionerId = searchIdInput.value.trim();
+    if (!practitionerId) {
+        msgDiv.textContent = "⚠️ الرجاء إدخال هوية المزاول للبحث.";
+        msgDiv.style.color = 'var(--warning-color)';
+        msgDiv.style.backgroundColor = 'var(--light-secondary-color)';
+        setTimeout(() => { msgDiv.textContent = ''; msgDiv.style.backgroundColor = ''; }, 3000);
+        return;
+    }
+
+    msgDiv.textContent = 'جاري البحث عن بيانات المزاول من المصدر الرئيسي...';
+    msgDiv.style.color = 'var(--primary-color)';
+    msgDiv.style.backgroundColor = 'var(--light-primary-color)';
+
+
+    const powerAutomateSearchBaseUrl = "https://prod-12.westeurope.logic.azure.com:443/workflows/e31084c955ad409e8b24114f2fd73713/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=PolzEv93fXCIOiJagEOmA7lzGeiCmRbpQNszjFUqTts";
+    const powerAutomateSearchUrl = `${powerAutomateSearchBaseUrl}&id=${practitionerId}`;
+
+    fetch(powerAutomateSearchUrl, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', }
+    })
+    .then(response => {
+        if (response.ok) { return response.json(); }
+        else if (response.status === 404) { return null; }
+        return response.text().then(text => {
+            throw new Error(`خطأ في البحث من المصدر: ${response.status} ${response.statusText}. التفاصيل: ${text}`);
+        });
+    })
+        .then(practitionerData => {
+            const currentSearchIdVal = searchIdInput.value; 
+            clearFormAndSignatures(); 
+            searchIdInput.value = currentSearchIdVal; 
+
+            if (practitionerData && typeof practitionerData === 'object' && Object.keys(practitionerData).length > 0) {
+                const fieldMappings = {
+                    FullName: 'name', NationalID: 'id', MobileNumber: 'phone', Location: 'practitioner_location_coords', 
+                    Nationality: 'nationality', MaritalStatus: 'status', DateOfBirth: 'dob', EducationLevel: 'education',
+                    Gender: 'gender', PracticeType: 'practice_type', Profession: 'profession', PreviouslyBanned: 'previously_prevented',
+                    PractitionerStatus: 'practice_status', VisitID: 'visit_type', MeetingDate: 'meeting_date', CommitteeNotes: 'notes',
+                    CommitteeOpinion: 'opinion', CriteriaQuranKnowledge: 'criteria1', CriteriaMedicalCheck: 'criteria2',
+                    CriteriaNoTorture: 'criteria3', CriteriaExpatAssistants: 'criteria4', CriteriaGroupReadingLoudspeakers: 'criteria5',
+                    CriteriaWomenWithMahram: 'criteria6', CriteriaMediaPromotion: 'criteria7', CriteriaProhibitedTitles: 'criteria8',
+                    CriteriaFinancialConditions: 'criteria9', CriteriaSellingUnknownProducts: 'criteria10', Signboard: 'criteria11',
+                    SafetyMeasures: 'criteria12', HomeVisits: 'criteria13', NeighborDisturbance: 'criteria14', CovidPrecautions: 'criteria15',
+                    RepIslamicAffairs: 'member_islamic_affairs', RepHaia: 'member_haia',
+                    RepCriminalInvestigation: 'member_criminal_investigation', RepCommitteeHead: 'member_committee_head',
+                    // Signature fields from SharePoint/PowerAutomate
+                    SignatureRepIslamicAffairs: 'signature_member1',
+                    SignatureRepHaia: 'signature_member2',
+                    SignatureRepCriminalInvestigation: 'signature_member3',
+                    SignatureRepCommitteeHead: 'signature_member4',
+                    // Dates for members
+                    DateRepIslamicAffairs: 'date_member1', DateRepHaia: 'date_member2',
+                    DateRepCriminalInvestigation: 'date_member3', DateRepCommitteeHead: 'date_member4'
+                };
+
+                Object.keys(fieldMappings).forEach(apiFieldName => {
+                    const formFieldId = fieldMappings[apiFieldName];
+                    let fieldValue = practitionerData[apiFieldName];
+                    const field = form.elements[formFieldId]; 
+
+                    if (field && fieldValue !== undefined && fieldValue !== null) {
+                        if (field.type === 'radio' || (field[0] && field[0].type === 'radio')) { 
+                            form.querySelectorAll(`input[name="${field.name || field[0].name}"][value="${fieldValue}"]`).forEach(rb => rb.checked = true);
+                        } 
+                        else if (formFieldId === 'practitioner_location_coords') {
+                            practitionerLocationCoordsInput.value = fieldValue;
+                            practitionerLocationInput.value = fieldValue; 
+                        } else if (formFieldId.startsWith('signature_member')) {
+                            const padKey = formFieldId.replace('signature_', ''); // e.g., member1
+                            if (signaturePads[padKey] && signaturePads[padKey].fromDataURL) {
+                                signaturePads[padKey].fromDataURL(fieldValue); // Load signature from DataURL
+                            }
+                             const hiddenSigInput = document.getElementById(formFieldId); // e.g. signature_member1
+                             if(hiddenSigInput) hiddenSigInput.value = fieldValue;
+
+                        }
+                        else { field.value = fieldValue; }
+                    }
+                });
+                
+                // Handle visit images from SharePoint (assuming they are stored as an array of base64 strings or objects)
+                if (practitionerData.VisitImages && Array.isArray(practitionerData.VisitImages)) {
+                    compressedImagesData = practitionerData.VisitImages.map((imgStr, index) => ({
+                        id: `loaded_${index}_${Date.now()}`, // Generate a unique ID
+                        name: `image_from_source_${index + 1}.jpg`, // Placeholder name
+                        type: 'image/jpeg', // Assuming JPEG
+                        data: imgStr.startsWith('data:image') ? imgStr : `data:image/jpeg;base64,${imgStr}` // Ensure it's a full DataURL
+                    })).slice(0, MAX_IMAGES); // Respect MAX_IMAGES limit
+                    displayImagePreviews();
+                } else {
+                    compressedImagesData = [];
+                    displayImagePreviews();
+                }
+
+
+                msgDiv.textContent = `تم تحميل أحدث بيانات للمزاول: ${practitionerData.FullName || practitionerId}.`;
+                msgDiv.style.color = 'var(--yes-color)';
+                msgDiv.style.backgroundColor = 'var(--light-primary-color)';
+                const idFieldToLock = document.getElementById('id');
+                if (idFieldToLock) {
+                    idFieldToLock.value = practitionerId; 
+                    idFieldToLock.setAttribute('readonly', 'true');
+                }
+                updateEvaluationAndWarnings(); 
+                if (currentUserRole === 'admin' && !inputSection.classList.contains('hidden')) {
+                    setTimeout(resizeAllSignaturePads, 50); 
+                }
+                localStorage.setItem(`practitioner_${practitionerId}`, JSON.stringify(practitionerData)); 
+
+            } else {
+                msgDiv.textContent = `لا توجد بيانات للمزاول برقم الهوية: ${practitionerId} في المصدر الرئيسي. يمكنك إدخال بيانات جديدة.`;
+                msgDiv.style.color = 'var(--warning-color)';
+                msgDiv.style.backgroundColor = 'var(--light-secondary-color)';
+                const idFieldToSet = form.elements['id'];
+                if (idFieldToSet) {
+                    idFieldToSet.value = practitionerId; 
+                    idFieldToSet.removeAttribute('readonly');
+                }
+                compressedImagesData = [];
+                displayImagePreviews(); 
+            }
+        })
+        .catch(error => {
+            console.error('خطأ أثناء جلب البيانات من Power Automate:', error);
+            msgDiv.textContent = 'حدث خطأ أثناء محاولة جلب البيانات: ' + error.message;
+            msgDiv.style.color = 'var(--no-color)';
+            msgDiv.style.backgroundColor = 'var(--light-secondary-color)'; 
+            
+            const localData = localStorage.getItem(`practitioner_${practitionerId}`);
+            if (localData) {
+                msgDiv.textContent += " .. يتم عرض البيانات المحلية كبديل.";
+                // Simplified local data loading, ensure fieldMappings match.
+                // For brevity, this part is kept concise. Full parsing as above is needed.
+                try {
+                    const practitionerLocalData = JSON.parse(localData);
+                     // Basic re-population, ensure full logic as in the success case if needed
+                    Object.keys(practitionerLocalData).forEach(key => {
+                        const field = form.elements[key];
+                        if(field && typeof field.value !== 'undefined') field.value = practitionerLocalData[key];
+                        // Add more complex field handling (radios, signatures, images) if needed for local fallback
+                    });
+                     if (practitionerLocalData.visit_images && Array.isArray(practitionerLocalData.visit_images)) {
+                        compressedImagesData = practitionerLocalData.visit_images.filter(img => img && img.data);
+                     } else { compressedImagesData = []; }
+
+                } catch (e) { console.error("Error parsing local data", e); }
+                 displayImagePreviews(); updateEvaluationAndWarnings();
+                 if (currentUserRole === 'admin' && !inputSection.classList.contains('hidden')) setTimeout(resizeAllSignaturePads, 50);
+            } else {
+                const currentSearchIdVal = searchIdInput.value;
+                clearFormAndSignatures(); 
+                searchIdInput.value = currentSearchIdVal; 
+                 const idFieldToSet = form.elements['id'];
+                 if (idFieldToSet) { idFieldToSet.value = practitionerId; idFieldToSet.removeAttribute('readonly'); }
+            }
+        });
+    });
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    if (currentUserRole !== 'admin') {
+        msgDiv.textContent = 'ليس لديك صلاحية لإرسال البيانات.';
+        msgDiv.style.color = 'var(--no-color)';
+        msgDiv.style.backgroundColor = 'var(--light-secondary-color)'; return;
+    }
+
+    const formData = new FormData(form);
+    const data = {}; // This will hold form data for Power Automate (data submission)
+    let allCriteriaChecked = true;
+    const criteriaElements = form.querySelectorAll('.criterion');
+    if (criteriaElements.length > 0) {
+        criteriaElements.forEach(criterion => {
+            const radioNameAttr = criterion.querySelector('input[type="radio"]');
+            if (radioNameAttr && !formData.has(radioNameAttr.name)) allCriteriaChecked = false;
+        });
+    }
+
+    if (!allCriteriaChecked && criteriaElements.length > 0) {
+        msgDiv.textContent = '⚠️ يرجى تقييم جميع معايير التقييم قبل الإرسال.';
+        msgDiv.style.color = 'var(--warning-color)';
+        msgDiv.style.backgroundColor = 'var(--light-secondary-color)';
+        const criteriaSection = document.querySelector('.criteria-section');
+        if (criteriaSection) criteriaSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+    }
+
+    for (let [key, value] of formData.entries()) {
+        if (key !== 'visit_attachments_hidden_because_custom_handled') { data[key] = value; }
+    }
+    for (const padKey in signaturePads) { // padKey is 'member1', 'member2', etc.
+        if (signaturePads[padKey] && signaturePads[padKey].canvas) {
+            // The hidden input field name is like 'signature_member1'
+            const hiddenInputName = `signature_${padKey}`; 
+            data[hiddenInputName] = signaturePads[padKey].canvas.getDataURL(); 
+        }
+    }
+    // Add compressed images as an array of base64 strings (data part only) for Power Automate
+    if (compressedImagesData.length > 0) { 
+        data.visit_images_base64 = compressedImagesData.map(img => img.data.split(',')[1]); 
+    } else {
+        data.visit_images_base64 = [];
+    }
+
+
+    const practitionerId = data.id;
+    if (!practitionerId) { 
+        msgDiv.textContent = 'رقم الهوية مطلوب لإرسال البيانات.';
+        msgDiv.style.color = 'var(--no-color)';
+        msgDiv.style.backgroundColor = 'var(--light-secondary-color)'; return;
+    }
+    const powerAutomateUrl = 'https://prod-105.westeurope.logic.azure.com:443/workflows/41cb8ac40f3b4a0e96dd952e446bae59/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=5llAGfAVFUP9gbBTEriAZ0RJxwn8V_BZI0v_YBARAEU';
+    msgDiv.textContent = 'جاري إرسال البيانات...'; msgDiv.style.color = 'var(--primary-color)';
+    msgDiv.style.backgroundColor = 'var(--light-primary-color)';
+
+    fetch(powerAutomateUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+    })
+    .then(response => {
+        if (response.ok) {
+            msgDiv.textContent = '✅ تم حفظ البيانات بنجاح.'; 
+            msgDiv.style.color = 'var(--yes-color)';
+            msgDiv.style.backgroundColor = 'var(--light-primary-color)';
+            const idFieldToLock = document.getElementById('id');
+            if (idFieldToLock) idFieldToLock.setAttribute('readonly', 'true');
+            localStorage.setItem(`practitioner_${practitionerId}`, JSON.stringify(data)); 
+
+            // --- NEW: Generate PDF and send to OneDrive ---
+            msgDiv.textContent += ' جاري إنشاء نسخة PDF للإرسال إلى OneDrive...';
+            generateAndOutputPdf({ outputType: 'dataurlstring' })
+                .then(pdfBase64StringWithPrefix => { // This is the full "data:application/pdf;base64,..." string
+                    if (pdfBase64StringWithPrefix) {
+                        const currentIdField = document.getElementById('id');
+                        const currentNameField = document.getElementById('name');
+                        const pIdForFile = currentIdField ? (currentIdField.value || "بيانات") : "بيانات";
+                        const pNameForFile = currentNameField ? (currentNameField.value || "مزاول") : "مزاول";
+                        const pdfFileNameForUpload = `محضر_${pNameForFile.replace(/\s+/g, '_')}_${pIdForFile}.pdf`;
+                        
+                        // IMPORTANT: Replace this with your actual Power Automate HTTP Trigger URL for OneDrive upload
+                        const oneDriveUploadPowerAutomateUrl = "YOUR_POWER_AUTOMATE_ONEDRIVE_UPLOAD_URL_HERE"; 
+                        
+                        const pdfBase64DataOnly = pdfBase64StringWithPrefix.substring(pdfBase64StringWithPrefix.indexOf(',') + 1);
+
+                        const payloadForOneDrive = {
+                            fileName: pdfFileNameForUpload,
+                            fileContent: pdfBase64DataOnly, // Send only the Base64 part
+                            targetFolder: "pdf" // The folder on OneDrive, Power Automate will use this
+                        };
+
+                        if (oneDriveUploadPowerAutomateUrl === "YOUR_POWER_AUTOMATE_ONEDRIVE_UPLOAD_URL_HERE") {
+                            console.warn("تنبيه للمطور: يرجى استبدال 'YOUR_POWER_AUTOMATE_ONEDRIVE_UPLOAD_URL_HERE' بالرابط الصحيح لـ Power Automate المخصص لرفع الملفات إلى OneDrive.");
+                            msgDiv.textContent = '✅ تم حفظ البيانات. (تنبيه: لم يتم تكوين رابط رفع PDF إلى OneDrive بعد).';
+                            msgDiv.style.color = 'var(--yes-color)'; // Still success for data
+                            setTimeout(() => { clearFormAndSignatures(); searchIdInput.value = ''; }, 3000);
+                            return; // Skip fetch if URL is placeholder
+                        }
+
+                        fetch(oneDriveUploadPowerAutomateUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payloadForOneDrive)
+                        })
+                        .then(uploadResponse => {
+                            if (uploadResponse.ok) {
+                                msgDiv.textContent = '✅ تم حفظ البيانات وإرسال PDF إلى OneDrive بنجاح!';
+                                msgDiv.style.color = 'var(--yes-color)';
+                            } else {
+                                uploadResponse.text().then(text => {
+                                    msgDiv.textContent = '✅ تم حفظ البيانات، لكن فشل إرسال PDF إلى OneDrive: ' + uploadResponse.status + ". التفاصيل: " + text;
+                                    msgDiv.style.color = 'var(--warning-color)';
+                                });
+                            }
+                        })
+                        .catch(uploadError => {
+                            console.error('خطأ في شبكة إرسال PDF إلى OneDrive:', uploadError);
+                            msgDiv.textContent = '✅ تم حفظ البيانات، لكن حدث خطأ في شبكة إرسال PDF إلى OneDrive: ' + uploadError.message;
+                            msgDiv.style.color = 'var(--warning-color)';
+                        })
+                        .finally(() => {
+                            setTimeout(() => { clearFormAndSignatures(); searchIdInput.value = ''; }, 3000); 
+                        });
+                    } else {
+                        msgDiv.textContent = '✅ تم حفظ البيانات، لكن فشل إنشاء PDF لـ OneDrive.';
+                        msgDiv.style.color = 'var(--warning-color)';
+                        setTimeout(() => { clearFormAndSignatures(); searchIdInput.value = ''; }, 3000);
+                    }
+                })
+                .catch(pdfError => {
+                    console.error('خطأ أثناء إنشاء PDF لـ OneDrive:', pdfError);
+                    msgDiv.textContent = '✅ تم حفظ البيانات، لكن خطأ أثناء إنشاء PDF لـ OneDrive: ' + pdfError.message;
+                    msgDiv.style.color = 'var(--warning-color)';
+                    setTimeout(() => { clearFormAndSignatures(); searchIdInput.value = ''; }, 3000);
+                });
+            // --- END PDF to OneDrive ---
+        } else {
+            response.text().then(text => {
+                msgDiv.textContent = 'خطأ في إرسال البيانات: ' + response.status + ". التفاصيل: " + text;
+                msgDiv.style.color = 'var(--no-color)';
+                msgDiv.style.backgroundColor = 'var(--light-secondary-color)';
+            });
+        }
+    })
+    .catch(error => {
+        msgDiv.textContent = 'خطأ في الشبكة: ' + error.message;
+        msgDiv.style.color = 'var(--no-color)';
+        msgDiv.style.backgroundColor = 'var(--light-secondary-color)';
+    });
+});
+
+    document.getElementById('update-button').addEventListener('click', function() {
+        if (currentUserRole !== 'admin') {
+            msgDiv.textContent = 'ليس لديك صلاحية لتعديل البيانات.';
+            msgDiv.style.color = 'var(--no-color)';
+            msgDiv.style.backgroundColor = 'var(--light-secondary-color)'; return;
+        }
+        const idField = form.elements['id'];
+        const practitionerId = idField ? idField.value : null;
+        // Check if data exists locally or if form has ID, assume it's an update intent.
+        if (!practitionerId || (!localStorage.getItem(`practitioner_${practitionerId}`) && !idField.readOnly) ) {
+            msgDiv.textContent = 'يرجى البحث عن مزاول أولاً لتعديل بياناته، أو قم بالإرسال لحفظ البيانات الجديدة إذا كانت الهوية مدخلة.';
+            msgDiv.style.color = 'var(--warning-color)';
+            msgDiv.style.backgroundColor = 'var(--light-secondary-color)'; return;
+        }
+        // Trigger the submit event, which now handles both data and PDF.
+        form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+    });
+
+    // --- MODIFICATION: Updated printPdfButton listener ---
+    printPdfButton.addEventListener('click', function() {
+        const elementToPrint = document.getElementById('printable-form-content');
+        if (!elementToPrint) {
+            msgDiv.textContent = 'خطأ: لم يتم العثور على محتوى الطباعة.';
+            msgDiv.style.color = 'var(--no-color)';
+            msgDiv.style.backgroundColor = 'var(--light-secondary-color)';
+            return;
+        }
+        msgDiv.textContent = 'جاري تجهيز PDF...';
+        msgDiv.style.color = 'var(--primary-color)';
+        msgDiv.style.backgroundColor = 'var(--light-primary-color)';
+
+        generateAndOutputPdf({ outputType: 'save' })
+            .then((result) => {
+                if (result.success) {
+                     msgDiv.textContent = `تم إنشاء وحفظ ${result.fileName} بنجاح.`;
+                     msgDiv.style.color = 'var(--yes-color)';
+                     msgDiv.style.backgroundColor = 'var(--light-primary-color)';
+                } else { // Should not happen if save is default and doesn't explicitly return {success: false}
+                    msgDiv.textContent = 'فشل إنشاء PDF.';
+                    msgDiv.style.color = 'var(--no-color)';
+                    msgDiv.style.backgroundColor = 'var(--light-secondary-color)';
+                }
+            })
+            .catch((error) => {
+                console.error("خطأ أثناء إنشاء PDF لزر الطباعة:", error);
+                msgDiv.textContent = 'خطأ أثناء إنشاء PDF: ' + error.message;
+                msgDiv.style.color = 'var(--no-color)';
+                msgDiv.style.backgroundColor = 'var(--light-secondary-color)';
+            });
+    });
+
+    flatpickr("#dob", { locale: "ar", dateFormat: "Y-m-d", altInput: true, altFormat: "j F Y", allowInput: true });
+    flatpickr("#meeting_date", { locale: "ar", dateFormat: "Y-m-d", defaultDate: "today", altInput: true, altFormat: "j F Y", allowInput: true });
+    ['#date_member1', '#date_member2', '#date_member3', '#date_member4'].forEach(s => {
+        flatpickr(s, { locale: "ar", dateFormat: "Y-m-d", defaultDate: "today", altInput: true, altFormat: "j F Y", allowInput: true });
+    });
+
+    window.addEventListener('scroll', () => {
+        scrollToTopButton.classList.toggle('visible', window.scrollY > 300); 
+    });
+    scrollToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    
+    if (!localStorage.getItem('userRole')) updateUIForRole('guest'); else updateUIForRole(localStorage.getItem('userRole')); 
+    displayImagePreviews(); 
+
+}); // End DOMContentLoaded
+    </script>
+</body>
+
+</html>
