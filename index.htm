@@ -985,6 +985,13 @@
     #final-evaluation.not-qualified { background-color: #ffe0e0 !important; border-left: 3px solid #E53E3E !important; }
     #final-evaluation:empty { display: none !important; }
 }
+#clear-all-button {
+    background-color: var(--no-color); /* Red color from your variables */
+    /* Add any other specific styles here if needed */
+}
+#clear-all-button:hover {
+    background-color: #C53030; /* Darker Red from your variables */
+}
 
     </style>
 </head>
@@ -1034,6 +1041,7 @@
                 <input type="text" id="search-id" name="search-id" pattern="\d{10}" maxlength="10"
                     title="يجب أن يكون 10 أرقام">
                 <button type="button" id="search-button">بحث</button>
+                <button type="button" id="clear-all-button" style="background-color: var(--no-color);">مسح كافة الحقول</button>
             </div>
 
 
@@ -2501,6 +2509,49 @@
     
     if (!localStorage.getItem('userRole')) updateUIForRole('guest'); else updateUIForRole(localStorage.getItem('userRole')); 
     displayImagePreviews(); 
+    const clearAllButton = document.getElementById('clear-all-button');
+
+    function clearAllFieldsAndForm() {
+        clearFormAndSignatures(); // Your existing function to clear form, signatures, messages etc.
+        
+        // Clear search input field
+        if (searchIdInput) {
+            searchIdInput.value = '';
+        }
+
+        // Ensure evaluation and warnings are updated
+        if (typeof updateEvaluationAndWarnings === "function") {
+            updateEvaluationAndWarnings();
+        }
+        
+        // Clear any existing messages in msgDiv
+        if (msgDiv) {
+            msgDiv.textContent = '';
+            msgDiv.style.backgroundColor = '';
+        }
+        
+        // Optionally, re-enable the ID field if it's part of your logic to lock it
+        const idField = document.getElementById('id');
+        if (idField) {
+            idField.removeAttribute('readonly');
+        }
+        
+        // Optionally, inform the user
+        if (msgDiv) {
+            msgDiv.textContent = 'تم مسح جميع الحقول.';
+            msgDiv.style.color = 'var(--primary-color)';
+            msgDiv.style.backgroundColor = 'var(--light-primary-color)';
+            setTimeout(() => { msgDiv.textContent = ''; msgDiv.style.backgroundColor = ''; }, 2000);
+        }
+        // Scroll to top of the form
+        if(inputSection) {
+            inputSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    if (clearAllButton) {
+        clearAllButton.addEventListener('click', clearAllFieldsAndForm);
+    }
 
 }); // End DOMContentLoaded
     </script>
